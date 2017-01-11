@@ -16,6 +16,15 @@ class Forecast {
     var _highTemp: String!
     var _lowTemp: String!
     
+//    var _longitude: String!
+//    var _latitude: String!
+//    var _pressure: Int!
+//    var _humidity:Int!
+//    var _windSpeed:Int!
+//    var _sunrise: String!
+//    var _sunset:String!
+    
+    
     var date: String {
         if self._date == nil {
             self._date = ""

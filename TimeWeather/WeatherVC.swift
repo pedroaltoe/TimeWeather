@@ -7,26 +7,28 @@
 //
 
 import UIKit
+import CoreLocation
 import Alamofire
 
-class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
     var currentWeather = CurrentWeather()
-//    var forecast = Forecast()
     var forecasts = [Forecast]()
+    let locationManager = CLLocationManager()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        self.forecasts.removeAll()
+        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.startMonitoringSignificantLocationChanges()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        
-        self.currentWeather.downloadWeatherDetails {
-            self.downloadForecastData {
-                self.updateMainUI()
-            }
-        }
     }
     
     
@@ -38,9 +40,48 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     
+    @IBAction func refreshData(_ sender: UIButton) {
+        self.forecasts.removeAll()
+        self.tableView.reloadData()
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    
+    // MARK: - CLLocationManagerDelegate
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch (status){
+        case .notDetermined: self.locationManager.requestWhenInUseAuthorization()
+            break
+        case .authorizedWhenInUse: self.locationManager.startUpdatingLocation()
+            break
+        default: print("DEFAULT", status.rawValue)
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.locationManager.stopUpdatingLocation()
+        if let currentLocation = locations.last {
+            Location.sharedInstance.latitude = currentLocation.coordinate.latitude
+            Location.sharedInstance.longitude = currentLocation.coordinate.longitude
+            self.currentWeather.downloadWeatherDetails {
+                self.downloadForecastData {
+                    self.updateMainUI()
+                }
+            }
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error while updating location " + error.localizedDescription)
+    }
+    
+    
     func downloadForecastData(completed: @escaping DownloadComplete) {
-        let forecastURL = URL(string: FORECAST_URL)!
-        Alamofire.request(forecastURL).responseJSON { response in
+        Alamofire.request(FORECAST_URL).responseJSON { response in
             let result = response.result
             
             if let dict = result.value as? Dictionary<String, AnyObject> {
@@ -49,15 +90,15 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                         let forecast = Forecast(weatherDict: obj)
                         self.forecasts.append(forecast)
                     }
-                    self.forecasts.removeFirst() //self.forecasts.remove(at: 0)
-                    self.tableView.reloadData()
                 }
+                self.forecasts.removeFirst() //self.forecasts.remove(at: 0)
+                self.tableView.reloadData()
             }
-            completed()
         }
+        completed()
     }
-    
-    
+
+
     func updateMainUI() {
         self.dateLabel.text = self.currentWeather.date
         self.currentTempLabel.text = self.currentWeather.currentTemp + "°"
@@ -65,6 +106,9 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.currentWeatherTypeLabel.text = self.currentWeather.weatherType
         self.currentWeatherImage.image = UIImage(named: self.currentWeather.weatherType)
     }
+    
+    
+    // MARK: - TableViewDataSource
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,5 +131,34 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let forecast = self.forecasts[indexPath.row]
+//        
+//        performSegue(withIdentifier: "detailsVC", sender: forecast)
+//    }
+//    
+//    override func performSegue(withIdentifier identifier: String, sender: Any?) {
+//        //TODO prepare data to send to detailsVC as in Forecast class
+//    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
