@@ -12,15 +12,16 @@ import Alamofire
 
 class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
-    var currentWeather = CurrentWeather()
-    var forecasts = [Forecast]()
-    let locationManager = CLLocationManager()
+    //MARK: - Properties
+    
+    
+    private let currentWeather = CurrentWeather()
+    private let locationManager = CLLocationManager()
+    private var forecasts = [Forecast]()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.forecasts.removeAll()
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -32,6 +33,9 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     }
     
     
+    //MARK: - IBOutlets
+    
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -41,8 +45,6 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     
     
     @IBAction func refreshData(_ sender: UIButton) {
-        self.forecasts.removeAll()
-        self.tableView.reloadData()
         self.locationManager.startUpdatingLocation()
     }
     
@@ -80,26 +82,29 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     }
     
     
-    func downloadForecastData(completed: @escaping DownloadComplete) {
+    // MARK: - Private Functions
+    
+    
+    private func downloadForecastData(completed: @escaping DownloadComplete) { // calling this func 3 times. why?
         Alamofire.request(FORECAST_URL).responseJSON { response in
             let result = response.result
-            
+            self.forecasts.removeAll()
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 if let list = dict["list"] as? [Dictionary<String, AnyObject>] {
                     for obj in list {
                         let forecast = Forecast(weatherDict: obj)
                         self.forecasts.append(forecast)
                     }
+                    self.forecasts.removeFirst() //self.forecasts.remove(at: 0)
+                    self.tableView.reloadData()
                 }
-                self.forecasts.removeFirst() //self.forecasts.remove(at: 0)
-                self.tableView.reloadData()
             }
+            completed()
         }
-        completed()
     }
+    
 
-
-    func updateMainUI() {
+    private func updateMainUI() {
         self.dateLabel.text = self.currentWeather.date
         self.currentTempLabel.text = self.currentWeather.currentTemp + "°"
         self.locationLabel.text = self.currentWeather.cityName + ", " + self.currentWeather.countryName

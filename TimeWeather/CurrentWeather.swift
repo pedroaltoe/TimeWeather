@@ -6,15 +6,15 @@
 //  Copyright © 2016 Pedro Altoe Costa. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Alamofire
 
 class CurrentWeather {
-    var _cityName: String!
-    var _date: String!
-    var _weatherType: String!
-    var _currentTemp: String!
-    var _coutryName: String!
+    private var _cityName: String!
+    private var _date: String!
+    private var _weatherType: String!
+    private var _currentTemp: String!
+    private var _coutryName: String!
     
     var cityName: String {
         if _cityName == nil {
