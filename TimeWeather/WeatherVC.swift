@@ -44,12 +44,15 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     @IBOutlet weak var tableView: UITableView!
     
     
-    @IBAction func refreshData(_ sender: UIButton) {
-        self.locationManager.startUpdatingLocation()
-    }
+    // MARK: - IBAction
     
     
-    // MARK: - CLLocationManagerDelegate
+//    @IBAction func refreshData(_ sender: UIButton) {
+//        self.locationManager.startUpdatingLocation()
+//    }
+    
+    
+    // MARK: - CLLocationManager
     
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -107,8 +110,8 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     private func updateMainUI() {
         self.dateLabel.text = self.currentWeather.date
         self.currentTempLabel.text = self.currentWeather.currentTemp + "°"
-        self.locationLabel.text = self.currentWeather.cityName + ", " + self.currentWeather.countryName
-        self.currentWeatherTypeLabel.text = self.currentWeather.weatherType
+        self.locationLabel.text = NSLocalizedString(self.currentWeather.cityName + ", " + self.currentWeather.countryName, comment: "Internationalizing the city and country name")
+        self.currentWeatherTypeLabel.text = NSLocalizedString(self.currentWeather.weatherType, comment: "Weather type") 
         self.currentWeatherImage.image = UIImage(named: self.currentWeather.weatherType)
     }
     

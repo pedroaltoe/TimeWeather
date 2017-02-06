@@ -77,7 +77,7 @@ class Forecast {
             dateFormatter.dateStyle = .full
             dateFormatter.dateFormat = "EEEE"
             dateFormatter.timeStyle = .none
-            self._date = unixConvertedDate.dateOfTheWeek()
+            self._date = unixConvertedDate.dateOfTheWeek().capitalized
         }
     }
     

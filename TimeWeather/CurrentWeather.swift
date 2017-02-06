@@ -38,7 +38,7 @@ class CurrentWeather {
         dateformatter.dateStyle = .long
         dateformatter.timeStyle = .none
         let currentDate = dateformatter.string(from: Date())
-        _date = "Today, \(currentDate)"
+        _date = NSLocalizedString("Today", comment: "Today translation" ) + ", \(currentDate)"
         
         return _date
     }

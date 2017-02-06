@@ -23,7 +23,7 @@ class WeatherCell: UITableViewCell {
     
     
     func configureCell (forecast: Forecast) {
-        self.weatherTypeLabel.text = forecast.weatherType
+        self.weatherTypeLabel.text = NSLocalizedString(forecast.weatherType , comment: "Weather type")
         self.weatherIcon.image = UIImage(named: forecast.weatherType)
         self.dayLabel.text = forecast.date
         self.highTempLabel.text = forecast.highTemp + "°"

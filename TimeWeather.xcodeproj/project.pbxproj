@@ -18,6 +18,7 @@
 		3757DBAA1E1B781F00295A6C /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA91E1B781F00295A6C /* WeatherVC.swift */; };
 		3757DBAC1E1BA0A900295A6C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBAB1E1BA0A900295A6C /* Location.swift */; };
 		37A21B1F1E1F9A5A004FC3E6 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A21B1E1E1F9A5A004FC3E6 /* DetailsVC.swift */; };
+		37AA731E1E48225B00FB94CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA731C1E48225B00FB94CE /* Localizable.strings */; };
 		59927C4668657785F230E530 /* Pods_TimeWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFB0FAB89B5C4012F5C07C8 /* Pods_TimeWeather.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,10 @@
 		3757DBA91E1B781F00295A6C /* WeatherVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
 		3757DBAB1E1BA0A900295A6C /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		37A21B1E1E1F9A5A004FC3E6 /* DetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
+		37AA731B1E4821DE00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		37AA731D1E48225B00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37AA73201E48254400FB94CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		37AA73211E48255C00FB94CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ABFB0FAB89B5C4012F5C07C8 /* Pods_TimeWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB5CC7EA045BF187F39AA14B /* Pods-TimeWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeWeather.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeWeather/Pods-TimeWeather.release.xcconfig"; sourceTree = "<group>"; };
 		F1E051C8CB56B43F89FEC5DA /* Pods-TimeWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeWeather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeWeather/Pods-TimeWeather.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,8 +85,9 @@
 				3757DBA31E1B780600295A6C /* CurrentWeather.swift */,
 				3757DBA51E1B780D00295A6C /* Forecast.swift */,
 				3757DBA71E1B781300295A6C /* WeatherCell.swift */,
-				3757DB931E1B764D00295A6C /* Main.storyboard */,
 				3757DBAB1E1BA0A900295A6C /* Location.swift */,
+				37AA731C1E48225B00FB94CE /* Localizable.strings */,
+				3757DB931E1B764D00295A6C /* Main.storyboard */,
 				3757DB961E1B764D00295A6C /* Assets.xcassets */,
 				3757DB981E1B764D00295A6C /* LaunchScreen.storyboard */,
 				3757DB9B1E1B764D00295A6C /* Info.plist */,
@@ -151,8 +157,9 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"pt-BR",
+				en,
 			);
 			mainGroup = 3757DB831E1B764D00295A6C;
 			productRefGroup = 3757DB8D1E1B764D00295A6C /* Products */;
@@ -170,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3757DB9A1E1B764D00295A6C /* LaunchScreen.storyboard in Resources */,
+				37AA731E1E48225B00FB94CE /* Localizable.strings in Resources */,
 				3757DB971E1B764D00295A6C /* Assets.xcassets in Resources */,
 				3757DB951E1B764D00295A6C /* Main.storyboard in Resources */,
 			);
@@ -248,6 +256,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				3757DB941E1B764D00295A6C /* Base */,
+				37AA731B1E4821DE00FB94CE /* pt-BR */,
+				37AA73201E48254400FB94CE /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -260,6 +270,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		37AA731C1E48225B00FB94CE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37AA731D1E48225B00FB94CE /* pt-BR */,
+				37AA73211E48255C00FB94CE /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -267,6 +286,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -317,6 +337,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
