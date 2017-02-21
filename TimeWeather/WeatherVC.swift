@@ -18,10 +18,14 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     private let currentWeather = CurrentWeather()
     private let locationManager = CLLocationManager()
     private var forecasts = [Forecast]()
-
+    private var refreshControl = UIRefreshControl()
+     
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.bottomView.layer.cornerRadius = 10
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -30,6 +34,10 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.refreshControl.addTarget(self, action: #selector(self.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
+        
+        self.tableView.addSubview(self.refreshControl)
     }
     
     
@@ -42,14 +50,14 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     @IBOutlet weak var currentWeatherImage: UIImageView!
     @IBOutlet weak var currentWeatherTypeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bottomView: UIView!
+    
     
     
     // MARK: - IBAction
     
     
-//    @IBAction func refreshData(_ sender: UIButton) {
-//        self.locationManager.startUpdatingLocation()
-//    }
+
     
     
     // MARK: - CLLocationManager
@@ -74,6 +82,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
             self.currentWeather.downloadWeatherDetails {
                 self.downloadForecastData {
                     self.updateMainUI()
+                    self.refreshControl.endRefreshing()
                 }
             }
         }
@@ -81,13 +90,32 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error while updating location " + error.localizedDescription)
+        self.locationManager.stopUpdatingLocation()
+        switch error {
+        case CLError.network, CLError.locationUnknown:
+            let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please connect to the internet to get latest weather data", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: {
+                action in self.locationManager.startUpdatingLocation()})
+            networkIssueAlert.addAction(okButton)
+            let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            networkIssueAlert.addAction(cancelButton)
+            self.present(networkIssueAlert, animated: true, completion: nil)
+            break
+        default: print("Error!")
+            break
+        }
     }
     
     
     // MARK: - Private Functions
     
     
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        self.locationManager.requestLocation()
+    }
+    
+    
+
     private func downloadForecastData(completed: @escaping DownloadComplete) { // calling this func 3 times. why?
         Alamofire.request(FORECAST_URL).responseJSON { response in
             let result = response.result
@@ -106,13 +134,23 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
         }
     }
     
-
+    
     private func updateMainUI() {
         self.dateLabel.text = self.currentWeather.date
         self.currentTempLabel.text = self.currentWeather.currentTemp + "°"
-        self.locationLabel.text = NSLocalizedString(self.currentWeather.cityName + ", " + self.currentWeather.countryName, comment: "Internationalizing the city and country name")
-        self.currentWeatherTypeLabel.text = NSLocalizedString(self.currentWeather.weatherType, comment: "Weather type") 
-        self.currentWeatherImage.image = UIImage(named: self.currentWeather.weatherType)
+        self.locationLabel.text = NSLocalizedString(self.currentWeather.cityName.uppercased() + ", " + self.currentWeather.countryName, comment: "Internationalizing the city and country name")
+        self.currentWeatherTypeLabel.text = NSLocalizedString(self.currentWeather.weatherType.uppercased(), comment: "Weather type")
+        
+        switch self.currentWeatherTypeLabel.text! {
+        case "Drizzle":
+            self.currentWeatherImage.image = UIImage(named: "Rain-ImgV")
+        case "Fog":
+            self.currentWeatherImage.image = UIImage(named: "Mist-ImgV")
+        case "Haze":
+            self.currentWeatherImage.image = UIImage(named: "Mist-ImgV")
+        default:
+            self.currentWeatherImage.image = UIImage(named: self.currentWeather.weatherType + "-ImgV")
+        }
     }
     
     

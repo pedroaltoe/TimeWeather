@@ -17,12 +17,16 @@
 		3757DBA81E1B781300295A6C /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA71E1B781300295A6C /* WeatherCell.swift */; };
 		3757DBAA1E1B781F00295A6C /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA91E1B781F00295A6C /* WeatherVC.swift */; };
 		3757DBAC1E1BA0A900295A6C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBAB1E1BA0A900295A6C /* Location.swift */; };
+		376C536C1E56848E0055BE08 /* Myriad Pro Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */; };
+		376C536D1E56848E0055BE08 /* Myriad Pro Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */; };
+		376C536E1E56848E0055BE08 /* Myriad Pro Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */; };
 		37A21B1F1E1F9A5A004FC3E6 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A21B1E1E1F9A5A004FC3E6 /* DetailsVC.swift */; };
 		37AA731E1E48225B00FB94CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA731C1E48225B00FB94CE /* Localizable.strings */; };
 		59927C4668657785F230E530 /* Pods_TimeWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFB0FAB89B5C4012F5C07C8 /* Pods_TimeWeather.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370CEF341E49856D00D06DBB /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		3757DB8C1E1B764D00295A6C /* TimeWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3757DB8F1E1B764D00295A6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3757DB941E1B764D00295A6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,6 +39,9 @@
 		3757DBA71E1B781300295A6C /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		3757DBA91E1B781F00295A6C /* WeatherVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
 		3757DBAB1E1BA0A900295A6C /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Bold.ttf"; sourceTree = "<group>"; };
+		376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Italic.ttf"; sourceTree = "<group>"; };
+		376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Regular.ttf"; sourceTree = "<group>"; };
 		37A21B1E1E1F9A5A004FC3E6 /* DetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
 		37AA731B1E4821DE00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		37AA731D1E48225B00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -89,10 +96,21 @@
 				37AA731C1E48225B00FB94CE /* Localizable.strings */,
 				3757DB931E1B764D00295A6C /* Main.storyboard */,
 				3757DB961E1B764D00295A6C /* Assets.xcassets */,
+				376C536B1E5683F20055BE08 /* Fonts */,
 				3757DB981E1B764D00295A6C /* LaunchScreen.storyboard */,
 				3757DB9B1E1B764D00295A6C /* Info.plist */,
 			);
 			path = TimeWeather;
+			sourceTree = "<group>";
+		};
+		376C536B1E5683F20055BE08 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */,
+				376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */,
+				376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		8436835D78E98A6231C77ECD /* Frameworks */ = {
@@ -176,6 +194,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				376C536C1E56848E0055BE08 /* Myriad Pro Regular.ttf in Resources */,
+				376C536D1E56848E0055BE08 /* Myriad Pro Italic.ttf in Resources */,
+				376C536E1E56848E0055BE08 /* Myriad Pro Bold.ttf in Resources */,
 				3757DB9A1E1B764D00295A6C /* LaunchScreen.storyboard in Resources */,
 				37AA731E1E48225B00FB94CE /* Localizable.strings in Resources */,
 				3757DB971E1B764D00295A6C /* Assets.xcassets in Resources */,
@@ -266,6 +287,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3757DB991E1B764D00295A6C /* Base */,
+				370CEF341E49856D00D06DBB /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

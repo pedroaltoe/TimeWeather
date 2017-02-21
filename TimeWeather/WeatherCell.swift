@@ -23,10 +23,21 @@ class WeatherCell: UITableViewCell {
     
     
     func configureCell (forecast: Forecast) {
-        self.weatherTypeLabel.text = NSLocalizedString(forecast.weatherType , comment: "Weather type")
+        self.weatherTypeLabel.text = NSLocalizedString(forecast.weatherType.uppercased() , comment: "Weather type")
         self.weatherIcon.image = UIImage(named: forecast.weatherType)
         self.dayLabel.text = forecast.date
         self.highTempLabel.text = forecast.highTemp + "°"
         self.lowTempLabel.text = forecast.lowTemp + "°"
+        
+        switch self.weatherTypeLabel.text! {
+        case "Drizzle":
+            self.weatherIcon.image = UIImage(named: "Rain-ImgV")
+        case "Fog":
+            self.weatherIcon.image = UIImage(named: "Mist-ImgV")
+        case "Haze":
+            self.weatherIcon.image = UIImage(named: "Mist-ImgV")
+        default:
+            self.weatherIcon.image = UIImage(named: forecast.weatherType + "-For")
+        }
     }
 }
