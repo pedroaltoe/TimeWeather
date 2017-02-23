@@ -17,7 +17,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     
     private let currentWeather = CurrentWeather()
     private let locationManager = CLLocationManager()
-    private var forecasts = [Forecast]()
+    private var forecasts: [Forecast] = []
     private var refreshControl = UIRefreshControl()
      
     
