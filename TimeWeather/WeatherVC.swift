@@ -121,17 +121,15 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
         let token = Alamofire.request(FORECAST_URL).responseJSON { [weak self] response in
             guard let sSelf = self else { return }
             let result = response.result
-            sSelf.forecasts.removeAll()
-            if let dict = result.value as? Dictionary<String, AnyObject> {
-                if let list = dict["list"] as? [Dictionary<String, AnyObject>] {
-                    for obj in list {
-                        let forecast = Forecast(weatherDict: obj)
-                        sSelf.forecasts.append(forecast)
-                    }
-                    sSelf.forecasts.removeFirst() //self.forecasts.remove(at: 0)
-                    sSelf.tableView.reloadData()
-                }
+            var forecasts: [Forecast] = []
+            if let dict = result.value as? Dictionary<String, AnyObject>,
+                let list = dict["list"] as? [Dictionary<String, AnyObject>] {
+                forecasts = Array(list
+                    .map({ Forecast(weatherDict: $0) })
+                    .dropFirst())
             }
+            sSelf.forecasts = forecasts
+            sSelf.tableView.reloadData()
             sSelf.forecastRequest?.handler?()
         }
         self.forecastRequest = (token, completed)
