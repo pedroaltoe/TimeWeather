@@ -111,27 +111,30 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     
     
     func handleRefresh(refreshControl: UIRefreshControl) {
-        self.locationManager.requestLocation()
+        self.locationManager.startUpdatingLocation()
     }
-    
-    
 
+    private var forecastRequest: (token: DataRequest, handler: DownloadComplete?)? = nil
     private func downloadForecastData(completed: @escaping DownloadComplete) { // calling this func 3 times. why?
-        Alamofire.request(FORECAST_URL).responseJSON { response in
+        self.forecastRequest?.token.cancel()
+        self.forecastRequest = nil
+        let token = Alamofire.request(FORECAST_URL).responseJSON { [weak self] response in
+            guard let sSelf = self else { return }
             let result = response.result
-            self.forecasts.removeAll()
+            sSelf.forecasts.removeAll()
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 if let list = dict["list"] as? [Dictionary<String, AnyObject>] {
                     for obj in list {
                         let forecast = Forecast(weatherDict: obj)
-                        self.forecasts.append(forecast)
+                        sSelf.forecasts.append(forecast)
                     }
-                    self.forecasts.removeFirst() //self.forecasts.remove(at: 0)
-                    self.tableView.reloadData()
+                    sSelf.forecasts.removeFirst() //self.forecasts.remove(at: 0)
+                    sSelf.tableView.reloadData()
                 }
             }
-            completed()
+            sSelf.forecastRequest?.handler?()
         }
+        self.forecastRequest = (token, completed)
     }
     
     
