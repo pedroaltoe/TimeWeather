@@ -16,11 +16,11 @@
 		3757DBA61E1B780D00295A6C /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA51E1B780D00295A6C /* Forecast.swift */; };
 		3757DBA81E1B781300295A6C /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA71E1B781300295A6C /* WeatherCell.swift */; };
 		3757DBAA1E1B781F00295A6C /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA91E1B781F00295A6C /* WeatherVC.swift */; };
-		3757DBAC1E1BA0A900295A6C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBAB1E1BA0A900295A6C /* Location.swift */; };
 		376C536C1E56848E0055BE08 /* Myriad Pro Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */; };
 		376C536D1E56848E0055BE08 /* Myriad Pro Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */; };
 		376C536E1E56848E0055BE08 /* Myriad Pro Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */; };
-		37A21B1F1E1F9A5A004FC3E6 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A21B1E1E1F9A5A004FC3E6 /* DetailsVC.swift */; };
+		376C53901E5E7D630055BE08 /* NextDaysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C538F1E5E7D630055BE08 /* NextDaysVC.swift */; };
+		376C53921E5E7DED0055BE08 /* TodaysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C53911E5E7DED0055BE08 /* TodaysVC.swift */; };
 		37AA731E1E48225B00FB94CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA731C1E48225B00FB94CE /* Localizable.strings */; };
 		59927C4668657785F230E530 /* Pods_TimeWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFB0FAB89B5C4012F5C07C8 /* Pods_TimeWeather.framework */; };
 /* End PBXBuildFile section */
@@ -38,11 +38,11 @@
 		3757DBA51E1B780D00295A6C /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		3757DBA71E1B781300295A6C /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		3757DBA91E1B781F00295A6C /* WeatherVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
-		3757DBAB1E1BA0A900295A6C /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Bold.ttf"; sourceTree = "<group>"; };
 		376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Italic.ttf"; sourceTree = "<group>"; };
 		376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Regular.ttf"; sourceTree = "<group>"; };
-		37A21B1E1E1F9A5A004FC3E6 /* DetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
+		376C538F1E5E7D630055BE08 /* NextDaysVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextDaysVC.swift; sourceTree = "<group>"; };
+		376C53911E5E7DED0055BE08 /* TodaysVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysVC.swift; sourceTree = "<group>"; };
 		37AA731B1E4821DE00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		37AA731D1E48225B00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37AA73201E48254400FB94CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -86,13 +86,13 @@
 			isa = PBXGroup;
 			children = (
 				3757DB8F1E1B764D00295A6C /* AppDelegate.swift */,
-				37A21B1E1E1F9A5A004FC3E6 /* DetailsVC.swift */,
 				3757DBA91E1B781F00295A6C /* WeatherVC.swift */,
+				376C53911E5E7DED0055BE08 /* TodaysVC.swift */,
+				376C538F1E5E7D630055BE08 /* NextDaysVC.swift */,
 				3757DBA11E1B77FB00295A6C /* Constants.swift */,
 				3757DBA31E1B780600295A6C /* CurrentWeather.swift */,
 				3757DBA51E1B780D00295A6C /* Forecast.swift */,
 				3757DBA71E1B781300295A6C /* WeatherCell.swift */,
-				3757DBAB1E1BA0A900295A6C /* Location.swift */,
 				37AA731C1E48225B00FB94CE /* Localizable.strings */,
 				3757DB931E1B764D00295A6C /* Main.storyboard */,
 				3757DB961E1B764D00295A6C /* Assets.xcassets */,
@@ -260,13 +260,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3757DBAA1E1B781F00295A6C /* WeatherVC.swift in Sources */,
-				37A21B1F1E1F9A5A004FC3E6 /* DetailsVC.swift in Sources */,
 				3757DB901E1B764D00295A6C /* AppDelegate.swift in Sources */,
+				376C53901E5E7D630055BE08 /* NextDaysVC.swift in Sources */,
 				3757DBA81E1B781300295A6C /* WeatherCell.swift in Sources */,
+				376C53921E5E7DED0055BE08 /* TodaysVC.swift in Sources */,
 				3757DBA41E1B780600295A6C /* CurrentWeather.swift in Sources */,
 				3757DBA21E1B77FB00295A6C /* Constants.swift in Sources */,
 				3757DBA61E1B780D00295A6C /* Forecast.swift in Sources */,
-				3757DBAC1E1BA0A900295A6C /* Location.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

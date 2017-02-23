@@ -22,7 +22,7 @@ class WeatherCell: UITableViewCell {
     @IBOutlet weak var lowTempLabel: UILabel!
     
     
-    func configureCell (forecast: Forecast) {
+    func configureCell(forecast: Forecast) {
         self.weatherTypeLabel.text = NSLocalizedString(forecast.weatherType.uppercased() , comment: "Weather type")
         self.weatherIcon.image = UIImage(named: forecast.weatherType)
         self.dayLabel.text = forecast.date
@@ -40,4 +40,6 @@ class WeatherCell: UITableViewCell {
             self.weatherIcon.image = UIImage(named: forecast.weatherType + "-For")
         }
     }
+    
+    public static let identifier = "WeatherCell"
 }

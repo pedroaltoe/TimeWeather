@@ -10,53 +10,34 @@ import UIKit
 import CoreLocation
 import Alamofire
 
-class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
+class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
-    //MARK: - Properties
+    // MARK: - Properties
     
-    
-    private let currentWeather = CurrentWeather()
     private let locationManager = CLLocationManager()
-    private var forecasts: [Forecast] = []
-    private var refreshControl = UIRefreshControl()
-     
+    private var forecastRequest: (token: DataRequest, handler: DownloadComplete?)? = nil
+    private lazy var todays: TodaysVC = {
+        return self.childViewControllers.filter({ $0 is TodaysVC }).first as! TodaysVC
+    }()
+    private lazy var nextDays: NextDaysVC = {
+        return self.childViewControllers.filter({ $0 is NextDaysVC }).first as! NextDaysVC
+    }()
     
+     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.bottomView.layer.cornerRadius = 10
+        self.todays.bottomView.layer.cornerRadius = 10
+
+        self.nextDays.refreshControl = UIRefreshControl()
+        self.nextDays.refreshControl?.addTarget(self, action: #selector(type(of: self).didPullToRefresh(control:)), for: .valueChanged)
         
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.startMonitoringSignificantLocationChanges()
-        
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        
-        self.refreshControl.addTarget(self, action: #selector(self.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged)
-        
-        self.tableView.addSubview(self.refreshControl)
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.startUpdatingLocation()
     }
-    
-    
-    //MARK: - IBOutlets
-    
-    
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var currentTempLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var currentWeatherImage: UIImageView!
-    @IBOutlet weak var currentWeatherTypeLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var bottomView: UIView!
-    
-    
-    
-    // MARK: - IBAction
-    
-    
 
     
     
@@ -77,13 +58,8 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locationManager.stopUpdatingLocation()
         if let currentLocation = locations.last {
-            Location.sharedInstance.latitude = currentLocation.coordinate.latitude
-            Location.sharedInstance.longitude = currentLocation.coordinate.longitude
-            self.currentWeather.downloadWeatherDetails {
-                self.downloadForecastData {
-                    self.updateMainUI()
-                    self.refreshControl.endRefreshing()
-                }
+            self.downloadWeatherDetails(coordinate: currentLocation.coordinate) {
+                self.downloadForecastData(coordinate: currentLocation.coordinate) {}
             }
         }
     }
@@ -109,16 +85,29 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     
     // MARK: - Private Functions
     
-    
-    func handleRefresh(refreshControl: UIRefreshControl) {
+    @objc
+    private func didPullToRefresh(control: UIRefreshControl) {
         self.locationManager.startUpdatingLocation()
     }
-
-    private var forecastRequest: (token: DataRequest, handler: DownloadComplete?)? = nil
-    private func downloadForecastData(completed: @escaping DownloadComplete) {
+    
+    private func downloadWeatherDetails(coordinate: CLLocationCoordinate2D, completed: @escaping DownloadComplete) {
+        Alamofire.request(coordinate.detailsUrl).responseJSON { response in
+            let result = response.result
+            
+            var currentWeather = CurrentWeather()
+            if let json = result.value as? [String: Any] {
+                currentWeather = CurrentWeather(json: json) ?? currentWeather
+            }
+            self.todays.currentWeather = currentWeather
+            completed()
+        }
+    }
+    
+    private func downloadForecastData(coordinate: CLLocationCoordinate2D, completed: @escaping DownloadComplete) {
+        self.nextDays.refreshControl?.beginRefreshing()
         self.forecastRequest?.token.cancel()
         self.forecastRequest = nil
-        let token = Alamofire.request(FORECAST_URL).responseJSON { [weak self] response in
+        let token = Alamofire.request(coordinate.forecastUrl).responseJSON { [weak self] response in
             guard let sSelf = self else { return }
             let result = response.result
             var forecasts: [Forecast] = []
@@ -128,84 +117,47 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
                     .map({ Forecast(weatherDict: $0) })
                     .dropFirst())
             }
-            sSelf.forecasts = forecasts
-            sSelf.tableView.reloadData()
+            
+            sSelf.nextDays.forecasts = forecasts
+            sSelf.nextDays.refreshControl?.endRefreshing()
             sSelf.forecastRequest?.handler?()
         }
         self.forecastRequest = (token, completed)
     }
+}
+
+
+extension CurrentWeather {
     
-    
-    private func updateMainUI() {
-        self.dateLabel.text = self.currentWeather.date
-        self.currentTempLabel.text = self.currentWeather.currentTemp + "°"
-        self.locationLabel.text = NSLocalizedString(self.currentWeather.cityName.uppercased() + ", " + self.currentWeather.countryName, comment: "Internationalizing the city and country name")
-        self.currentWeatherTypeLabel.text = NSLocalizedString(self.currentWeather.weatherType.uppercased(), comment: "Weather type")
+    init?(json: [String: Any]) {
+        self.cityName = ((json["name"] as? String) ?? "").capitalized
         
-        switch self.currentWeatherTypeLabel.text! {
-        case "Drizzle":
-            self.currentWeatherImage.image = UIImage(named: "Rain-ImgV")
-        case "Fog":
-            self.currentWeatherImage.image = UIImage(named: "Mist-ImgV")
-        case "Haze":
-            self.currentWeatherImage.image = UIImage(named: "Mist-ImgV")
-        default:
-            self.currentWeatherImage.image = UIImage(named: self.currentWeather.weatherType + "-ImgV")
-        }
+        let weather = json["weather"] as? [[String: Any]]
+        self.weatherType = ((weather?.first?["main"] as? String) ?? "").capitalized
+        
+        let main =  json["main"] as? [String: Any]
+        let temp = main?["temp"] as? Double
+        self.currentTemp = temp.flatMap({ String(Int($0 - 273.15)) }) ?? "--"
+        
+        let sys = json["sys"] as? [String: Any]
+        self.countryName = ((sys?["country"] as? String) ?? "").uppercased()
+        
+        guard let timestamp = json["dt"] as? TimeInterval else { return nil }
+        self.date = Date(timeIntervalSince1970: timestamp)
     }
-    
-    
-    // MARK: - TableViewDataSource
-    
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.forecasts.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = self.tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? WeatherCell {
-            let forecast = self.forecasts[indexPath.row]
-            cell.configureCell(forecast: forecast)
-            
-            return cell
-            
-        } else {
-            return WeatherCell()
-        }
-    }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let forecast = self.forecasts[indexPath.row]
-//        
-//        performSegue(withIdentifier: "detailsVC", sender: forecast)
-//    }
-//    
-//    override func performSegue(withIdentifier identifier: String, sender: Any?) {
-//        //TODO prepare data to send to detailsVC as in Forecast class
-//    }
     
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+extension CLLocationCoordinate2D {
+    
+    var forecastUrl: String {
+        let url = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=\(self.latitude)&lon=\(self.longitude)&cnt=10&mode=json&appid=ff27f55b14ac026738922f15b9ce708d"
+        return url
+    }
+    
+    var detailsUrl: String {
+        let url = "http://api.openweathermap.org/data/2.5/weather?lat=\(self.latitude)&lon=\(self.longitude)&appid=ff27f55b14ac026738922f15b9ce708d"
+        return url
+    }
+}
