@@ -115,7 +115,7 @@ class WeatherVC: UIViewController, UITableViewDataSource, UITableViewDelegate, C
     }
 
     private var forecastRequest: (token: DataRequest, handler: DownloadComplete?)? = nil
-    private func downloadForecastData(completed: @escaping DownloadComplete) { // calling this func 3 times. why?
+    private func downloadForecastData(completed: @escaping DownloadComplete) {
         self.forecastRequest?.token.cancel()
         self.forecastRequest = nil
         let token = Alamofire.request(FORECAST_URL).responseJSON { [weak self] response in
