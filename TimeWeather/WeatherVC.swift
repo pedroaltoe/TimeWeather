@@ -57,18 +57,23 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locationManager.stopUpdatingLocation()
-        if let currentLocation = locations.last {
-            self.downloadWeatherDetails(coordinate: currentLocation.coordinate) {
-                self.downloadForecastData(coordinate: currentLocation.coordinate) {}
+        print(">>>> Coordinates: \(locations.map({ $0.coordinate }))")
+        if let location = locations.last,
+            CLLocationCoordinate2DIsValid(location.coordinate) {
+            if let currentLocation = self.currentLocation,
+                currentLocation.timestamp > location.timestamp {
+                self.nextDays.refreshControl?.endRefreshing()
+                return
             }
+            self.currentLocation = location
         }
     }
     
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.locationManager.stopUpdatingLocation()
         switch error {
-        case CLError.network, CLError.locationUnknown:
+        case CLError.network:
+            self.locationManager.stopUpdatingLocation()
             let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please connect to the internet to get latest weather data", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: {
                 action in self.locationManager.startUpdatingLocation()})
@@ -77,7 +82,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
             networkIssueAlert.addAction(cancelButton)
             self.present(networkIssueAlert, animated: true, completion: nil)
             break
-        default: print("Error!")
+        default: print("Error! \(error.localizedDescription)")
             break
         }
     }
@@ -85,12 +90,44 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Private Functions
     
+    private var currentLocation: CLLocation? = nil {
+        didSet {
+            guard self.currentLocation != nil else {
+                self.nextDays.refreshControl?.endRefreshing()
+                return
+            }
+            self.scheduleFetchWeatherForecast()
+        }
+    }
+    
+    private var coordinate: CLLocationCoordinate2D? {
+        return self.currentLocation?.coordinate
+    }
+    
+    private func scheduleFetchWeatherForecast() {
+        let selector = #selector(type(of: self).fetchWeatherForecast)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: selector, object: nil)
+        self.perform(selector, with: coordinate, afterDelay: 1.0)
+    }
+    
+    @objc
+    private func fetchWeatherForecast() {
+        guard let coordinate = self.coordinate else { return }
+        self.nextDays.refreshControl?.beginRefreshing()
+        self.downloadWeatherDetails(for: coordinate) {
+            self.downloadForecastData(for: coordinate) {
+                self.nextDays.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
     @objc
     private func didPullToRefresh(control: UIRefreshControl) {
         self.locationManager.startUpdatingLocation()
     }
     
-    private func downloadWeatherDetails(coordinate: CLLocationCoordinate2D, completed: @escaping DownloadComplete) {
+    private func downloadWeatherDetails(for coordinate: CLLocationCoordinate2D, completed: @escaping DownloadComplete) {
+        print("coordinate: \(coordinate)")
         Alamofire.request(coordinate.detailsUrl).responseJSON { response in
             let result = response.result
             
@@ -103,8 +140,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    private func downloadForecastData(coordinate: CLLocationCoordinate2D, completed: @escaping DownloadComplete) {
-        self.nextDays.refreshControl?.beginRefreshing()
+    private func downloadForecastData(for coordinate: CLLocationCoordinate2D, completed: @escaping DownloadComplete) {
         self.forecastRequest?.token.cancel()
         self.forecastRequest = nil
         let token = Alamofire.request(coordinate.forecastUrl).responseJSON { [weak self] response in
@@ -119,8 +155,8 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
             }
             
             sSelf.nextDays.forecasts = forecasts
-            sSelf.nextDays.refreshControl?.endRefreshing()
             sSelf.forecastRequest?.handler?()
+            sSelf.forecastRequest = nil
         }
         self.forecastRequest = (token, completed)
     }
