@@ -11,19 +11,6 @@ import CoreLocation
 import Alamofire
 
 class WeatherVC: UIViewController, CLLocationManagerDelegate {
-    
-    // MARK: - Properties
-    
-    private let locationManager = CLLocationManager()
-    private var forecastRequest: (token: DataRequest, handler: DownloadComplete?)? = nil
-    private lazy var todays: TodaysVC = {
-        return self.childViewControllers.filter({ $0 is TodaysVC }).first as! TodaysVC
-    }()
-    private lazy var nextDays: NextDaysVC = {
-        return self.childViewControllers.filter({ $0 is NextDaysVC }).first as! NextDaysVC
-    }()
-    
-     
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +25,17 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.startUpdatingLocation()
     }
+    
+
+    // MARK: - Properties
+    
+    private let locationManager = CLLocationManager()
+    private lazy var todays: TodaysVC = {
+        return self.childViewControllers.filter({ $0 is TodaysVC }).first as! TodaysVC
+    }()
+    private lazy var nextDays: NextDaysVC = {
+        return self.childViewControllers.filter({ $0 is NextDaysVC }).first as! NextDaysVC
+    }()
 
     
     
@@ -57,7 +55,6 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locationManager.stopUpdatingLocation()
-        print(">>>> Coordinates: \(locations.map({ $0.coordinate }))")
         if let location = locations.last,
             CLLocationCoordinate2DIsValid(location.coordinate) {
             if let currentLocation = self.currentLocation,
@@ -74,7 +71,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
         switch error {
         case CLError.network:
             self.locationManager.stopUpdatingLocation()
-            let networkIssueAlert = UIAlertController(title: "Network Error", message: "Please connect to the internet to get latest weather data", preferredStyle: .alert)
+            let networkIssueAlert = UIAlertController(title: "Network Error", message: "Unable to get latest weather data", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: {
                 action in self.locationManager.startUpdatingLocation()})
             networkIssueAlert.addAction(okButton)
@@ -114,10 +111,11 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     private func fetchWeatherForecast() {
         guard let coordinate = self.coordinate else { return }
         self.nextDays.refreshControl?.beginRefreshing()
-        self.downloadWeatherDetails(for: coordinate) {
-            self.downloadForecastData(for: coordinate) {
-                self.nextDays.refreshControl?.endRefreshing()
-            }
+
+        WeatherAPI.fetchWeatherReport(for: coordinate) { [weak self] report in
+            self?.todays.currentWeather = report.currentWeather
+            self?.nextDays.forecasts = report.forecasts
+            self?.nextDays.refreshControl?.endRefreshing()
         }
     }
     
@@ -125,75 +123,5 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     private func didPullToRefresh(control: UIRefreshControl) {
         self.locationManager.startUpdatingLocation()
     }
-    
-    private func downloadWeatherDetails(for coordinate: CLLocationCoordinate2D, completed: @escaping DownloadComplete) {
-        print("coordinate: \(coordinate)")
-        Alamofire.request(coordinate.detailsUrl).responseJSON { response in
-            let result = response.result
-            
-            var currentWeather = CurrentWeather()
-            if let json = result.value as? [String: Any] {
-                currentWeather = CurrentWeather(json: json) ?? currentWeather
-            }
-            self.todays.currentWeather = currentWeather
-            completed()
-        }
-    }
-    
-    private func downloadForecastData(for coordinate: CLLocationCoordinate2D, completed: @escaping DownloadComplete) {
-        self.forecastRequest?.token.cancel()
-        self.forecastRequest = nil
-        let token = Alamofire.request(coordinate.forecastUrl).responseJSON { [weak self] response in
-            guard let sSelf = self else { return }
-            let result = response.result
-            var forecasts: [Forecast] = []
-            if let dict = result.value as? Dictionary<String, AnyObject>,
-                let list = dict["list"] as? [Dictionary<String, AnyObject>] {
-                forecasts = Array(list
-                    .map({ Forecast(weatherDict: $0) })
-                    .dropFirst())
-            }
-            
-            sSelf.nextDays.forecasts = forecasts
-            sSelf.forecastRequest?.handler?()
-            sSelf.forecastRequest = nil
-        }
-        self.forecastRequest = (token, completed)
-    }
-}
 
-
-extension CurrentWeather {
-    
-    init?(json: [String: Any]) {
-        self.cityName = ((json["name"] as? String) ?? "").capitalized
-        
-        let weather = json["weather"] as? [[String: Any]]
-        self.weatherType = ((weather?.first?["main"] as? String) ?? "").capitalized
-        
-        let main =  json["main"] as? [String: Any]
-        let temp = main?["temp"] as? Double
-        self.currentTemp = temp.flatMap({ String(Int($0 - 273.15)) }) ?? "--"
-        
-        let sys = json["sys"] as? [String: Any]
-        self.countryName = ((sys?["country"] as? String) ?? "").uppercased()
-        
-        guard let timestamp = json["dt"] as? TimeInterval else { return nil }
-        self.date = Date(timeIntervalSince1970: timestamp)
-    }
-    
-}
-
-
-extension CLLocationCoordinate2D {
-    
-    var forecastUrl: String {
-        let url = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=\(self.latitude)&lon=\(self.longitude)&cnt=10&mode=json&appid=ff27f55b14ac026738922f15b9ce708d"
-        return url
-    }
-    
-    var detailsUrl: String {
-        let url = "http://api.openweathermap.org/data/2.5/weather?lat=\(self.latitude)&lon=\(self.longitude)&appid=ff27f55b14ac026738922f15b9ce708d"
-        return url
-    }
 }

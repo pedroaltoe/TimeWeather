@@ -11,7 +11,6 @@
 		3757DB951E1B764D00295A6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3757DB931E1B764D00295A6C /* Main.storyboard */; };
 		3757DB971E1B764D00295A6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3757DB961E1B764D00295A6C /* Assets.xcassets */; };
 		3757DB9A1E1B764D00295A6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3757DB981E1B764D00295A6C /* LaunchScreen.storyboard */; };
-		3757DBA21E1B77FB00295A6C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA11E1B77FB00295A6C /* Constants.swift */; };
 		3757DBA41E1B780600295A6C /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA31E1B780600295A6C /* CurrentWeather.swift */; };
 		3757DBA61E1B780D00295A6C /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA51E1B780D00295A6C /* Forecast.swift */; };
 		3757DBA81E1B781300295A6C /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA71E1B781300295A6C /* WeatherCell.swift */; };
@@ -21,6 +20,10 @@
 		376C536E1E56848E0055BE08 /* Myriad Pro Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */; };
 		376C53901E5E7D630055BE08 /* NextDaysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C538F1E5E7D630055BE08 /* NextDaysVC.swift */; };
 		376C53921E5E7DED0055BE08 /* TodaysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C53911E5E7DED0055BE08 /* TodaysVC.swift */; };
+		376C54041E666D300055BE08 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C54031E666D300055BE08 /* WeatherAPI.swift */; };
+		376C54081E666FFB0055BE08 /* WeatherReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C54071E666FFB0055BE08 /* WeatherReport.swift */; };
+		376C540A1E6673FA0055BE08 /* WeatherAPI+CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C54091E6673FA0055BE08 /* WeatherAPI+CurrentWeather.swift */; };
+		376C540C1E667B960055BE08 /* WeatherAPI+Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C540B1E667B960055BE08 /* WeatherAPI+Forecast.swift */; };
 		37AA731E1E48225B00FB94CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA731C1E48225B00FB94CE /* Localizable.strings */; };
 		59927C4668657785F230E530 /* Pods_TimeWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFB0FAB89B5C4012F5C07C8 /* Pods_TimeWeather.framework */; };
 /* End PBXBuildFile section */
@@ -33,7 +36,6 @@
 		3757DB961E1B764D00295A6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3757DB991E1B764D00295A6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3757DB9B1E1B764D00295A6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3757DBA11E1B77FB00295A6C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3757DBA31E1B780600295A6C /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		3757DBA51E1B780D00295A6C /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		3757DBA71E1B781300295A6C /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
@@ -43,6 +45,10 @@
 		376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Regular.ttf"; sourceTree = "<group>"; };
 		376C538F1E5E7D630055BE08 /* NextDaysVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextDaysVC.swift; sourceTree = "<group>"; };
 		376C53911E5E7DED0055BE08 /* TodaysVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysVC.swift; sourceTree = "<group>"; };
+		376C54031E666D300055BE08 /* WeatherAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		376C54071E666FFB0055BE08 /* WeatherReport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherReport.swift; sourceTree = "<group>"; };
+		376C54091E6673FA0055BE08 /* WeatherAPI+CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeatherAPI+CurrentWeather.swift"; sourceTree = "<group>"; };
+		376C540B1E667B960055BE08 /* WeatherAPI+Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeatherAPI+Forecast.swift"; sourceTree = "<group>"; };
 		37AA731B1E4821DE00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		37AA731D1E48225B00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37AA73201E48254400FB94CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -85,13 +91,12 @@
 		3757DB8E1E1B764D00295A6C /* TimeWeather */ = {
 			isa = PBXGroup;
 			children = (
+				376C54021E666D090055BE08 /* Services */,
+				376C53FF1E666C500055BE08 /* Models */,
 				3757DB8F1E1B764D00295A6C /* AppDelegate.swift */,
 				3757DBA91E1B781F00295A6C /* WeatherVC.swift */,
 				376C53911E5E7DED0055BE08 /* TodaysVC.swift */,
 				376C538F1E5E7D630055BE08 /* NextDaysVC.swift */,
-				3757DBA11E1B77FB00295A6C /* Constants.swift */,
-				3757DBA31E1B780600295A6C /* CurrentWeather.swift */,
-				3757DBA51E1B780D00295A6C /* Forecast.swift */,
 				3757DBA71E1B781300295A6C /* WeatherCell.swift */,
 				37AA731C1E48225B00FB94CE /* Localizable.strings */,
 				3757DB931E1B764D00295A6C /* Main.storyboard */,
@@ -111,6 +116,26 @@
 				376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		376C53FF1E666C500055BE08 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				376C54071E666FFB0055BE08 /* WeatherReport.swift */,
+				3757DBA31E1B780600295A6C /* CurrentWeather.swift */,
+				3757DBA51E1B780D00295A6C /* Forecast.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		376C54021E666D090055BE08 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				376C54031E666D300055BE08 /* WeatherAPI.swift */,
+				376C54091E6673FA0055BE08 /* WeatherAPI+CurrentWeather.swift */,
+				376C540B1E667B960055BE08 /* WeatherAPI+Forecast.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		8436835D78E98A6231C77ECD /* Frameworks */ = {
@@ -260,12 +285,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3757DBAA1E1B781F00295A6C /* WeatherVC.swift in Sources */,
+				376C540A1E6673FA0055BE08 /* WeatherAPI+CurrentWeather.swift in Sources */,
 				3757DB901E1B764D00295A6C /* AppDelegate.swift in Sources */,
+				376C54081E666FFB0055BE08 /* WeatherReport.swift in Sources */,
 				376C53901E5E7D630055BE08 /* NextDaysVC.swift in Sources */,
+				376C540C1E667B960055BE08 /* WeatherAPI+Forecast.swift in Sources */,
 				3757DBA81E1B781300295A6C /* WeatherCell.swift in Sources */,
 				376C53921E5E7DED0055BE08 /* TodaysVC.swift in Sources */,
 				3757DBA41E1B780600295A6C /* CurrentWeather.swift in Sources */,
-				3757DBA21E1B77FB00295A6C /* Constants.swift in Sources */,
+				376C54041E666D300055BE08 /* WeatherAPI.swift in Sources */,
 				3757DBA61E1B780D00295A6C /* Forecast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

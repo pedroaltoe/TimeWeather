@@ -32,7 +32,6 @@ final class NextDaysVC: UITableViewController {
             self.reloadData()
         }
     }
-    
 }
 
 
@@ -47,9 +46,6 @@ extension NextDaysVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: WeatherCell.identifier, for: indexPath)
     }
-    
-    
-    
 }
 
 
@@ -63,5 +59,6 @@ extension NextDaysVC {
         }
         cell.configureCell(forecast: forecasts[indexPath.row])
     }
-    
 }
+
+

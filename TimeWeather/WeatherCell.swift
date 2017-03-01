@@ -25,7 +25,7 @@ class WeatherCell: UITableViewCell {
     func configureCell(forecast: Forecast) {
         self.weatherTypeLabel.text = NSLocalizedString(forecast.weatherType.uppercased() , comment: "Weather type")
         self.weatherIcon.image = UIImage(named: forecast.weatherType)
-        self.dayLabel.text = forecast.date
+        self.dayLabel.text = self.dateToString(forecast.date)
         self.highTempLabel.text = forecast.highTemp + "°"
         self.lowTempLabel.text = forecast.lowTemp + "°"
         
@@ -39,6 +39,19 @@ class WeatherCell: UITableViewCell {
         default:
             self.weatherIcon.image = UIImage(named: forecast.weatherType + "-For")
         }
+    }
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter
+    }()
+    
+    private func dateToString(_ date: Date) -> String {
+        let dateString = self.dateFormatter.string(from: date)
+        return dateString
     }
     
     public static let identifier = "WeatherCell"
