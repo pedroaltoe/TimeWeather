@@ -17,6 +17,7 @@ typealias WeatherReportCompletionHandler = (WeatherReport) -> Void
 enum WeatherAPI {
     
     private struct Request {
+        let id = arc4random()
         let detailsRequest: DataRequest
         let forecastRequest: DataRequest
         let handler: WeatherReportCompletionHandler
@@ -37,6 +38,7 @@ enum WeatherAPI {
         
         var currentWeather = CurrentWeather()
         var forecasts: [Forecast] = []
+        var todaysVC = TodaysVC()
         
         group.enter()
         let detailsRequest = Alamofire.request(coordinate.detailsUrl).responseJSON { response in
@@ -62,15 +64,17 @@ enum WeatherAPI {
                 }
             }
         }
-        self.requestToken = Request(detailsRequest: detailsRequest, forecastRequest: forecastRequest, handler: completed)
+        let requestToken = Request(detailsRequest: detailsRequest, forecastRequest: forecastRequest, handler: completed)
+        self.requestToken = requestToken
         
         group.notify(queue: DispatchQueue.main) {
+            guard let rq = self.requestToken,
+                rq.id == requestToken.id,
+                requestToken.detailsRequest.task?.state == .completed else { return }
             defer { self.requestToken = nil }
-            guard self.requestToken?.detailsRequest.task?.state == .completed else { return }
             self.requestToken?.handler(WeatherReport(currentWeather: currentWeather, forecasts: forecasts))
         }
     }
-
 }
 
 
@@ -80,7 +84,7 @@ fileprivate extension CLLocationCoordinate2D {
     private var appid: String { return "ff27f55b14ac026738922f15b9ce708d" }
     
     var forecastUrl: String {
-        let url = self.baseUrl + "/forecast/daily?lat=\(self.latitude)&lon=\(self.longitude)&cnt=10&mode=json&appid=" + self.appid
+        let url = self.baseUrl + "/forecast/daily?lat=\(self.latitude)&lon=\(self.longitude)&cnt=10&appid=" + self.appid
         return url
     }
     
