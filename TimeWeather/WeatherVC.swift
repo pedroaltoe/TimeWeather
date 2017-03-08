@@ -19,6 +19,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 
         self.nextDays.refreshControl = UIRefreshControl()
         self.nextDays.refreshControl?.addTarget(self, action: #selector(type(of: self).didPullToRefresh(control:)), for: .valueChanged)
+        self.nextDays.refreshControl?.beginRefreshing()
         
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
@@ -54,16 +55,15 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last,
+            CLLocationCoordinate2DIsValid(location.coordinate) else { return }
         self.locationManager.stopUpdatingLocation()
-        if let location = locations.last,
-            CLLocationCoordinate2DIsValid(location.coordinate) {
-            if let currentLocation = self.currentLocation,
-                currentLocation.timestamp > location.timestamp {
-                self.nextDays.refreshControl?.endRefreshing()
-                return
-            }
-            self.currentLocation = location
+        if let currentLocation = self.currentLocation,
+            currentLocation.timestamp > location.timestamp {
+            self.nextDays.refreshControl?.endRefreshing()
+            return
         }
+        self.currentLocation = location
     }
     
     
