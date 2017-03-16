@@ -32,6 +32,16 @@ final class NextDaysVC: UITableViewController {
             self.reloadData()
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == DetailsDayVC.identifier {
+            if let destinationVC = segue.destination as? DetailsDayVC {
+                if let weatherDetails = sender as? WeatherDetails {
+                    destinationVC.weatherDetails = weatherDetails
+                }
+            }
+        }
+    }
 }
 
 

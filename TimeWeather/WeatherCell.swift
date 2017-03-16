@@ -23,9 +23,9 @@ class WeatherCell: UITableViewCell {
     
     
     func configureCell(forecast: Forecast) {
-        self.weatherTypeLabel.text = NSLocalizedString(forecast.weatherType.uppercased() , comment: "Weather type")
+        self.weatherTypeLabel.text = NSLocalizedString(forecast.weatherType, comment: "Weather type").uppercased()
         self.weatherIcon.image = UIImage(named: forecast.weatherType)
-        self.dayLabel.text = self.dateToString(forecast.date)
+        self.dayLabel.text = self.dateToString(forecast.date).capitalized
         self.highTempLabel.text = forecast.highTemp + "°"
         self.lowTempLabel.text = forecast.lowTemp + "°"
         

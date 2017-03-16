@@ -39,6 +39,7 @@ enum WeatherAPI {
         var currentWeather = CurrentWeather()
         var forecasts: [Forecast] = []
         var todaysVC = TodaysVC()
+        var weatherDetails: [WeatherDetails] = []
         
         group.enter()
         let detailsRequest = Alamofire.request(coordinate.detailsUrl).responseJSON { response in
@@ -61,6 +62,7 @@ enum WeatherAPI {
                     forecasts = Array(list
                         .flatMap({ Forecast(json: $0) })
                         .dropFirst())
+                    weatherDetails = Array(list.flatMap({ WeatherDetails(json: $0) }).dropFirst())
                 }
             }
         }

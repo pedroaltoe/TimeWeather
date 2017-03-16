@@ -27,6 +27,9 @@ extension Forecast {
         self.date = Date(timeIntervalSince1970: timestamp)
     }
     
+    
+    // MARK: - Private stuff
+    
     private enum Keys {
         static let temp = "temp"
         static let min = "min"
