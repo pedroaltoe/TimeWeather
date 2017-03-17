@@ -34,9 +34,9 @@ final class NextDaysVC: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == DetailsDayVC.identifier {
+        if segue.identifier == "WeatherDetailsVC" {
             if let destinationVC = segue.destination as? DetailsDayVC {
-                if let weatherDetails = sender as? WeatherDetails {
+                if let weatherDetails = sender as? [WeatherDetails] {
                     destinationVC.weatherDetails = weatherDetails
                 }
             }
@@ -70,5 +70,19 @@ extension NextDaysVC {
         cell.configureCell(forecast: forecasts[indexPath.row])
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

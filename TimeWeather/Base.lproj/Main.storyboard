@@ -182,10 +182,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clear-For" translatesAutoresizingMaskIntoConstraints="NO" id="vZH-gH-Dx2">
-                                            <rect key="frame" x="8" y="15.5" width="94" height="60"/>
+                                            <rect key="frame" x="8" y="15.5" width="39" height="60"/>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mz6-Ra-ETX">
-                                            <rect key="frame" x="120" y="14.5" width="110" height="63"/>
+                                            <rect key="frame" x="65" y="14.5" width="110" height="63"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBN-y5-ktQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="110" height="32"/>
@@ -210,7 +210,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0gZ-Hp-0s8">
-                                            <rect key="frame" x="327" y="14.5" width="30" height="62"/>
+                                            <rect key="frame" x="272" y="14.5" width="30" height="62"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="khj-TR-NyC">
                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="62"/>
@@ -246,7 +246,7 @@
                                             </constraints>
                                         </stackView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Termometro" translatesAutoresizingMaskIntoConstraints="NO" id="kdF-7k-w3J">
-                                            <rect key="frame" x="294" y="11.5" width="25" height="68"/>
+                                            <rect key="frame" x="239" y="11.5" width="25" height="68"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="25" id="BHh-Kc-V83"/>
                                             </constraints>
@@ -314,7 +314,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRw-6P-w88">
                                 <rect key="frame" x="0.0" y="300" width="320" height="268"/>
                                 <connections>
-                                    <segue destination="wwt-Dw-hLa" kind="embed" id="5tn-wf-Lv5"/>
+                                    <segue destination="hNq-hE-xBH" kind="embed" id="Sup-Ay-fpZ"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -334,110 +334,6 @@
             </objects>
             <point key="canvasLocation" x="940" y="226"/>
         </scene>
-        <!--Details DayVC-->
-        <scene sceneID="s8v-H4-iHN">
-            <objects>
-                <viewController id="wwt-Dw-hLa" customClass="DetailsDayVC" customModule="TimeWeather" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="adu-8X-nnb"/>
-                        <viewControllerLayoutGuide type="bottom" id="aDq-nB-Yc3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NfV-tU-lDK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="268"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7hU-Vu-C7I">
-                                <rect key="frame" x="30" y="30" width="101" height="53"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9g-Wj-5Vz">
-                                        <rect key="frame" x="0.0" y="0.0" width="101" height="19"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="19"/>
-                                        <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0A-mW-iXf">
-                                        <rect key="frame" x="32" y="34" width="37" height="19"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-It" family="Myriad Pro" pointSize="17"/>
-                                        <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3SN-Xr-npC">
-                                <rect key="frame" x="217" y="30" width="73" height="53"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pressure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDh-dZ-3ey">
-                                        <rect key="frame" x="0.0" y="0.0" width="73" height="19"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="19"/>
-                                        <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZk-HP-5UT">
-                                        <rect key="frame" x="18" y="34" width="37" height="19"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-It" family="Myriad Pro" pointSize="17"/>
-                                        <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MHl-De-EPq">
-                                <rect key="frame" x="30" y="185" width="127" height="53"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind Direction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-bN-73K">
-                                        <rect key="frame" x="0.0" y="0.0" width="127" height="19"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="19"/>
-                                        <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6df-zG-QGL">
-                                        <rect key="frame" x="45" y="34" width="37" height="19"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-It" family="Myriad Pro" pointSize="17"/>
-                                        <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="m6n-L3-3Di">
-                                <rect key="frame" x="210.5" y="185" width="79.5" height="53"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxa-qu-kPh">
-                                        <rect key="frame" x="0.0" y="0.0" width="79.5" height="19"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="19"/>
-                                        <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0C-M7-e7a">
-                                        <rect key="frame" x="21.5" y="34" width="37" height="19"/>
-                                        <fontDescription key="fontDescription" name="MyriadPro-It" family="Myriad Pro" pointSize="17"/>
-                                        <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.82330995798110962" green="0.82737213373184204" blue="0.835560142993927" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="MHl-De-EPq" firstAttribute="leading" secondItem="NfV-tU-lDK" secondAttribute="leadingMargin" constant="14" id="BAT-GA-J8e"/>
-                            <constraint firstAttribute="trailing" secondItem="3SN-Xr-npC" secondAttribute="trailing" constant="30" id="BFE-bG-usM"/>
-                            <constraint firstItem="aDq-nB-Yc3" firstAttribute="top" secondItem="MHl-De-EPq" secondAttribute="bottom" constant="30" id="RSV-Ta-0bz"/>
-                            <constraint firstItem="aDq-nB-Yc3" firstAttribute="top" secondItem="m6n-L3-3Di" secondAttribute="bottom" constant="30" id="SAa-YX-L1M"/>
-                            <constraint firstAttribute="trailing" secondItem="m6n-L3-3Di" secondAttribute="trailing" constant="30" id="VW0-q1-K38"/>
-                            <constraint firstItem="7hU-Vu-C7I" firstAttribute="top" secondItem="adu-8X-nnb" secondAttribute="bottom" constant="30" id="Wqh-Kf-4ny"/>
-                            <constraint firstItem="3SN-Xr-npC" firstAttribute="top" secondItem="adu-8X-nnb" secondAttribute="bottom" constant="30" id="a9B-J3-vri"/>
-                            <constraint firstItem="7hU-Vu-C7I" firstAttribute="leading" secondItem="NfV-tU-lDK" secondAttribute="leading" constant="30" id="vBX-VK-Wnm"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="humidityLabel" destination="T0C-M7-e7a" id="epX-Xs-wfo"/>
-                        <outlet property="pressureLabel" destination="nZk-HP-5UT" id="ip4-fs-MSQ"/>
-                        <outlet property="windDirectionLabel" destination="6df-zG-QGL" id="s6J-eo-4Sg"/>
-                        <outlet property="windSpeedLabel" destination="I0A-mW-iXf" id="Lho-UQ-BF0"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wE8-dF-Nsf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1725" y="429.92957746478874"/>
-        </scene>
         <!--Info DayVC-->
         <scene sceneID="A4O-uJ-pDe">
             <objects>
@@ -451,7 +347,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUz-XS-YXw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHc-mD-WCY">
                                         <rect key="frame" x="12" y="35" width="0.0" height="32"/>
@@ -460,17 +356,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g5V-Kx-lru">
-                                        <rect key="frame" x="247" y="60" width="120" height="120"/>
+                                        <rect key="frame" x="192" y="60" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="rVd-wi-M2p"/>
                                             <constraint firstAttribute="height" constant="120" id="t2O-cc-B0I"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AfU-WB-QCH">
-                                        <rect key="frame" x="12" y="256" width="350" height="10"/>
+                                        <rect key="frame" x="12" y="256" width="295" height="10"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gj-3E-kfu">
-                                                <rect key="frame" x="332" y="6" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="277" y="6" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="15"/>
                                                 <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -527,7 +423,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DO4-Ql-jwv" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1726" y="61"/>
+            <point key="canvasLocation" x="1759" y="59"/>
+        </scene>
+        <!--Details DayVC-->
+        <scene sceneID="YtT-X4-YhQ">
+            <objects>
+                <tableViewController id="hNq-hE-xBH" customClass="DetailsDayVC" customModule="TimeWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zme-bR-yO6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="268"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailsCell" rowHeight="90" id="JbI-hE-Sqn" customClass="DetailsCell" customModule="TimeWeather" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JbI-hE-Sqn" id="lsf-ZS-CxZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MHl-De-EPq">
+                                            <rect key="frame" x="165" y="18" width="127" height="53"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind Direction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVB-bN-73K">
+                                                    <rect key="frame" x="0.0" y="0.0" width="127" height="19"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="19"/>
+                                                    <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6df-zG-QGL">
+                                                    <rect key="frame" x="45" y="34" width="37" height="19"/>
+                                                    <fontDescription key="fontDescription" name="MyriadPro-It" family="Myriad Pro" pointSize="17"/>
+                                                    <color key="textColor" red="0.1215686275" green="0.37254901959999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MHl-De-EPq" firstAttribute="centerY" secondItem="lsf-ZS-CxZ" secondAttribute="centerY" id="2u0-gq-VcE"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MHl-De-EPq" secondAttribute="trailing" constant="20" id="6ZS-y1-vJB"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.82330995798110962" green="0.82737213373184204" blue="0.835560142993927" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="titleLabel" destination="mVB-bN-73K" id="Vjm-VQ-LrT"/>
+                                    <outlet property="valueLabel" destination="6df-zG-QGL" id="IKT-q6-H0l"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="hNq-hE-xBH" id="YYd-Cb-ZAJ"/>
+                            <outlet property="delegate" destination="hNq-hE-xBH" id="MoA-gw-uwV"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z0e-IU-gDC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1759" y="421"/>
         </scene>
     </scenes>
     <resources>
