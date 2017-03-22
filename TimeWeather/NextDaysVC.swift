@@ -26,6 +26,9 @@ final class NextDaysVC: UITableViewController {
     
     
     // MARK: - Public stuff
+
+    
+    weak var delegate: NextDaysVCDelegate?
     
     var forecasts: [Forecast] = [] {
         didSet {
@@ -33,13 +36,9 @@ final class NextDaysVC: UITableViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "WeatherDetailsVC" {
-            if let destinationVC = segue.destination as? DetailsDayVC {
-                if let weatherDetails = sender as? [WeatherDetails] {
-                    destinationVC.weatherDetails = weatherDetails
-                }
-            }
+    var currentWeather: [CurrentWeather] = [] {
+        didSet {
+            self.reloadData()
         }
     }
 }
@@ -69,6 +68,16 @@ extension NextDaysVC {
         }
         cell.configureCell(forecast: forecasts[indexPath.row])
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+       self.delegate?.didSelectForecast(forecast: self.forecasts[indexPath.row])
+    }
+}
+
+protocol NextDaysVCDelegate: NSObjectProtocol {
+    
+    func didSelectForecast(forecast: Forecast)
 }
 
 

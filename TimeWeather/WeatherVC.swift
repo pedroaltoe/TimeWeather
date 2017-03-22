@@ -25,13 +25,15 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.startUpdatingLocation()
+        
+        self.nextDays.delegate = self
     }
     
 
     // MARK: - Properties
     
     private let locationManager = CLLocationManager()
-    private lazy var todays: TodaysVC = {
+    fileprivate lazy var todays: TodaysVC = {
         return self.childViewControllers.filter({ $0 is TodaysVC }).first as! TodaysVC
     }()
     private lazy var nextDays: NextDaysVC = {
@@ -124,4 +126,15 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
         self.locationManager.startUpdatingLocation()
     }
 
+}
+
+extension WeatherVC: NextDaysVCDelegate {
+    
+    func didSelectForecast(forecast: Forecast) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let weatherDetailsVC = storyboard.instantiateViewController(withIdentifier: "WeatherDetailsVC") as! WeatherDetailsVC
+        weatherDetailsVC.weatherDetails = forecast
+        weatherDetailsVC.currentWeather = CurrentWeather(cityName: self.todays.currentWeather.cityName, countryName: self.todays.currentWeather.countryName, date: forecast.date, weatherType: forecast.weatherType, currentTemp: forecast.highTemp)
+        self.present(weatherDetailsVC, animated: true , completion: nil)
+    }
 }

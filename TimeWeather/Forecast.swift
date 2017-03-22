@@ -15,12 +15,27 @@ struct Forecast {
     let weatherType: String
     let highTemp: String
     let lowTemp: String
+    let pressure: String
+    let humidity: String
+    let windSpeed: String
+    let windDirection: String
+//    let cityName: String
+//    let countryName: String
+//    let currentTemp: String
     
-    init(date: Date = Date(), weatherType: String = "", highTemp: String = "--", lowTemp: String = "--") {
+    init(date: Date = Date(), weatherType: String = "", highTemp: String = "--", lowTemp: String = "--", pressure: String = "--", humidity: String = "--", windSpeed: String = "--", windDirection: String = "--") {
+        
         self.date = date
         self.weatherType = weatherType
         self.highTemp = highTemp
         self.lowTemp = lowTemp
+        self.pressure = pressure
+        self.humidity = humidity
+        self.windSpeed = windSpeed
+        self.windDirection = windDirection
+//        self.cityName = cityName
+//        self.countryName = countryName
+//        self.currentTemp = currentTemp
     }
 }
 

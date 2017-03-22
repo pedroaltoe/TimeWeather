@@ -23,6 +23,7 @@ class WeatherCell: UITableViewCell {
     
     
     func configureCell(forecast: Forecast) {
+        
         self.weatherTypeLabel.text = NSLocalizedString(forecast.weatherType, comment: "Weather type").uppercased()
         self.weatherIcon.image = UIImage(named: forecast.weatherType)
         self.dayLabel.text = self.dateToString(forecast.date).capitalized

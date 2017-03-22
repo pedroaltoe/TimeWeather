@@ -13,12 +13,18 @@ class WeatherDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
+        self.infoDays.currentWeather = self.currentWeather
+        self.detailsDayVC.detailsDay = self.weatherDetails
+    }   
+    
+    var weatherDetails = Forecast()
+    var currentWeather = CurrentWeather()
+    
     
     // MARK - Properties
     
-    private lazy var infoDays: InfoDayVC = {
-        return self.childViewControllers.filter({ $0 is InfoDayVC }).first as! InfoDayVC
+    private lazy var infoDays: TodaysVC = {
+        return self.childViewControllers.filter({ $0 is TodaysVC }).first as! TodaysVC
     }()
     private lazy var detailsDayVC: DetailsDayVC = {
         return self.childViewControllers.filter({ $0 is DetailsDayVC }).first as! DetailsDayVC
