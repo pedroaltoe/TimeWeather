@@ -14,6 +14,7 @@ class WeatherDetailsVC: UIViewController {
         super.viewDidLoad()
         
         self.infoDays.currentWeather = self.currentWeather
+        self.infoDays.forecast = self.weatherDetails
         self.detailsDayVC.detailsDay = self.weatherDetails
     }   
     

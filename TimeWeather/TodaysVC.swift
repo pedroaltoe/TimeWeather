@@ -24,15 +24,15 @@ class TodaysVC: UIViewController {
         
         self.dateLabel.text = self.dateToString(self.currentWeather.date)
         self.currentTempLabel.text = self.currentWeather.currentTemp + "°"
+        self.minTempLabel.text = self.forecast.lowTemp + "°"
         self.locationLabel.text = NSLocalizedString(self.currentWeather.cityName.uppercased() + ", " + self.currentWeather.countryName, comment: "Internationalizing the city and country name")
-        self.currentWeatherTypeLabel.text = NSLocalizedString(self.currentWeather.weatherType.uppercased(), comment: "Weather type")
-        
+        self.currentWeatherTypeLabel.text = NSLocalizedString(self.currentWeather.weatherType, comment: "Weather Type").uppercased()
         switch self.currentWeatherTypeLabel.text! {
-        case "Drizzle":
+        case "DRIZZLE", "CHUVA":
             self.currentWeatherImage.image = UIImage(named: "Rain-ImgV")
-        case "Fog":
+        case "FOG", "NÉVOA":
             self.currentWeatherImage.image = UIImage(named: "Mist-ImgV")
-        case "Haze":
+        case "HAZE", "NÉVOA":
             self.currentWeatherImage.image = UIImage(named: "Mist-ImgV")
         default:
             self.currentWeatherImage.image = UIImage(named: self.currentWeather.weatherType + "-ImgV")
@@ -47,11 +47,10 @@ class TodaysVC: UIViewController {
     }()
     
     private func dateToString(_ date: Date) -> String {
-        let components = Calendar.current.dateComponents([.day], from: date, to: Date())
+        let components = Calendar.current.dateComponents([.day], from: Date(), to: date)
         let today = components.day.flatMap({ $0 == 0 ? NSLocalizedString("Today", comment: "Today translation") : nil }) ?? ""
-        let dateString = [today, String(self.dateFormatter.string(from: date))]
-            .filter({ !$0.isEmpty })
-            .joined(separator: ", ")
+        let dateString = [today, String(self.dateFormatter.string(from: date))].filter({ !$0.isEmpty }).joined(separator: ", ")
+        
         return dateString
     }
     
@@ -64,11 +63,24 @@ class TodaysVC: UIViewController {
     @IBOutlet weak var currentWeatherImage: UIImageView!
     @IBOutlet weak var currentWeatherTypeLabel: UILabel!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var minTempLabel: UILabel!
+    
+    
+    
+    
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    var forecast = Forecast() {
+        didSet {
+            self.reloadData()
+        }
+    }
     
     var currentWeather = CurrentWeather() {
         didSet {
             self.reloadData()
         }
     }
-
 }

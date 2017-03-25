@@ -59,8 +59,7 @@ enum WeatherAPI {
                 if let dict = result.value as? [String: Any],
                     let list = dict["list"] as? [[String: Any]] {
                     forecasts = Array(list
-                        .flatMap({ Forecast(json: $0) })
-                        .dropFirst())
+                        .flatMap({ Forecast(json: $0) }))
                 }
             }
         }

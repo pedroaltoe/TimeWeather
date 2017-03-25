@@ -72,13 +72,13 @@ private extension DetailsCell.Kind {
         switch self {
         case .pressure:
             title = NSLocalizedString("Pressure", comment: "")
-            value = NSLocalizedString(forecast.pressure + "hPa", comment: "Pressure Value in Hectopascal")
+            value = NSLocalizedString(forecast.pressure + " hPa", comment: "Pressure Value in Hectopascal")
         case .humidity:
             title = NSLocalizedString("Humidity", comment: "")
-            value = NSLocalizedString(forecast.humidity + "%", comment: "Humidity Percentage")
+            value = NSLocalizedString(forecast.humidity + " %", comment: "Humidity Percentage")
         case .windSpeed:
             title = NSLocalizedString("Wind Speed", comment: "")
-            value = NSLocalizedString(forecast.windSpeed + "Km/h", comment: "Wind Speed")
+            value = NSLocalizedString(forecast.windSpeed + " KM/H", comment: "Wind Speed")
         case .WindDirection:
             title = NSLocalizedString("Wind Direction", comment: "")
             value = Double(forecast.windDirection)?.direction ?? "--"
@@ -103,14 +103,14 @@ private extension Double {
         case 101.25..<123.75: return "ESE"
         case 123.75..<146.25: return "SE"
         case 146.25..<168.75: return "SSE"
-        case 168.75..<191.25: return"S"
-        case 191.25..<213.75: return"SSW"
-        case 213.75..<236.25: return"SW"
-        case 236.25..<258.75: return"WSW"
-        case 258.75..<281.25: return"W"
-        case 281.25..<303.75: return"WNW"
-        case 303.75..<326.25: return"NW"
-        case 326.25..<348.75: return"NNW"
+        case 168.75..<191.25: return "S"
+        case 191.25..<213.75: return "SSW"
+        case 213.75..<236.25: return "SW"
+        case 236.25..<258.75: return "WSW"
+        case 258.75..<281.25: return "W"
+        case 281.25..<303.75: return "WNW"
+        case 303.75..<326.25: return "NW"
+        case 326.25..<348.75: return "NNW"
         default: preconditionFailure()
         }
     }

@@ -106,10 +106,10 @@
 				37E4933D1E78C075002C1885 /* DetailsDayVC.swift */,
 				37E493401E7A6CCF002C1885 /* DetailsCell.swift */,
 				37E493441E81EF8A002C1885 /* Main.storyboard */,
+				3757DB981E1B764D00295A6C /* LaunchScreen.storyboard */,
 				37AA731C1E48225B00FB94CE /* Localizable.strings */,
 				3757DB961E1B764D00295A6C /* Assets.xcassets */,
 				376C536B1E5683F20055BE08 /* Fonts */,
-				3757DB981E1B764D00295A6C /* LaunchScreen.storyboard */,
 				3757DB9B1E1B764D00295A6C /* Info.plist */,
 			);
 			path = TimeWeather;
@@ -447,6 +447,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pedrocosta.timeweather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -462,6 +463,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pedrocosta.timeweather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -5,7 +5,7 @@
 "Clear" = "Céu Aberto";
 
 /* (No Commment) */
-"Cloudy" = "Nublado";
+"Clouds" = "Nublado";
 
 /* (No Commment) */
 "Drizzle" = "Chuva";
@@ -28,3 +28,12 @@
 /* Today translation */
 "Today" = "Hoje";
 
+"Pressure" = "Pressão";
+
+"Humidity" = "Humidade";
+
+"Wind Speed" = "Velocidade do Vento";
+
+"Wind Direction" = "Direção do Vento";
+
+"Thunder Storm" = "Tempestade de Raios";

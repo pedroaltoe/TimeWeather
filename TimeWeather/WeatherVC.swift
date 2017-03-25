@@ -14,8 +14,6 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.todays.bottomView.layer.cornerRadius = 10
 
         self.nextDays.refreshControl = UIRefreshControl()
         self.nextDays.refreshControl?.addTarget(self, action: #selector(type(of: self).didPullToRefresh(control:)), for: .valueChanged)
@@ -27,6 +25,8 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
         self.locationManager.startUpdatingLocation()
         
         self.nextDays.delegate = self
+        
+        self.todays.minTempLabel.isHidden = true
     }
     
 
@@ -136,5 +136,19 @@ extension WeatherVC: NextDaysVCDelegate {
         weatherDetailsVC.weatherDetails = forecast
         weatherDetailsVC.currentWeather = CurrentWeather(cityName: self.todays.currentWeather.cityName, countryName: self.todays.currentWeather.countryName, date: forecast.date, weatherType: forecast.weatherType, currentTemp: forecast.highTemp)
         self.present(weatherDetailsVC, animated: true , completion: nil)
+    }
+}
+
+extension UIImageView {
+    
+    @IBInspectable
+    var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
     }
 }

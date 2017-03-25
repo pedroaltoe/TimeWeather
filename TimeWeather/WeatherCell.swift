@@ -12,7 +12,7 @@ class WeatherCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
     
     @IBOutlet weak var weatherIcon: UIImageView!
@@ -31,9 +31,9 @@ class WeatherCell: UITableViewCell {
         self.lowTempLabel.text = forecast.lowTemp + "°"
         
         switch self.weatherTypeLabel.text! {
-        case "Drizzle":
+        case "DRIZZLE":
             self.weatherIcon.image = UIImage(named: "Rain-ImgV")
-        case "Fog":
+        case "FOG":
             self.weatherIcon.image = UIImage(named: "Mist-ImgV")
         case "Haze":
             self.weatherIcon.image = UIImage(named: "Mist-ImgV")
@@ -44,6 +44,7 @@ class WeatherCell: UITableViewCell {
     
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .none
         dateFormatter.dateFormat = "EEEE"
@@ -51,8 +52,10 @@ class WeatherCell: UITableViewCell {
     }()
     
     private func dateToString(_ date: Date) -> String {
-        let dateString = self.dateFormatter.string(from: date)
-        return dateString
+
+        let components = Calendar.current.dateComponents([.day], from: date, to: Date())
+        let today = components.day.flatMap({ $0 == 0 ? NSLocalizedString("Today", comment: "Today translation") : nil }) ?? String(self.dateFormatter.string(from: date))
+        return today!
     }
     
     public static let identifier = "WeatherCell"
