@@ -15,25 +15,25 @@ extension Forecast {
         
         let temp = json[Keys.temp] as? [String: Any]
         let min = temp?[Keys.min] as? Double
-        self.lowTemp = min.flatMap({ String(Int($0 - 273.15)) }) ?? "--"
+        self.lowTemp = min.flatMap({ String(Int(round($0 - 273.15))) }) ?? "--"
         
         let max = temp?[Keys.max] as? Double
-        self.highTemp = max.flatMap({ String(Int($0 - 273.15)) }) ?? "--"
+        self.highTemp = max.flatMap({ String(Int(round($0 - 273.15))) }) ?? "--"
         
         let weather = json[Keys.weather] as? [[String: Any]]
         self.weatherType = ((weather?.first?[Keys.main] as? String) ?? "").capitalized
         
         let pressure = json[Keys.pressure] as? Double
-        self.pressure = pressure.flatMap({ String(Int($0)) }) ?? "--"
+        self.pressure = pressure.flatMap({ String(Int(round($0))) }) ?? "--"
         
         let humidity = json[Keys.humidity] as? Double
-        self.humidity = humidity.flatMap({ String(Int($0)) }) ?? "--"
+        self.humidity = humidity.flatMap({ String(Int(round($0))) }) ?? "--"
         
         let windSpeed = json[Keys.windSpeed] as? Double
-        self.windSpeed = windSpeed.flatMap({ String(Int($0 * 3.6)) }) ?? "--"
+        self.windSpeed = windSpeed.flatMap({ String(Int(round($0 * 3.6))) }) ?? "--"
         
         let windDirection = json[Keys.windDirection] as? Double
-        self.windDirection = windDirection.flatMap({ String(Int($0)) }) ?? "--"
+        self.windDirection = windDirection.flatMap({ String(Int(round($0))) }) ?? "--"
         
         guard let timestamp = json[Keys.timestamp] as? TimeInterval else { return nil }
         self.date = Date(timeIntervalSince1970: timestamp)

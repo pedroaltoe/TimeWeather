@@ -44,16 +44,17 @@ class WeatherCell: UITableViewCell {
     
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateStyle = .long
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.timeStyle = .none
         dateFormatter.dateFormat = "EEEE"
         return dateFormatter
     }()
     
     private func dateToString(_ date: Date) -> String {
-
-        let components = Calendar.current.dateComponents([.day], from: date, to: Date())
+        let secondsFromGMT = TimeZone.current.secondsFromGMT()
+        let newDate = date.addingTimeInterval(TimeInterval(secondsFromGMT))
+        let components = Calendar.current.dateComponents([.day], from: newDate, to: Date())
         let today = components.day.flatMap({ $0 == 0 ? NSLocalizedString("Today", comment: "Today translation") : nil }) ?? String(self.dateFormatter.string(from: date))
         return today!
     }
