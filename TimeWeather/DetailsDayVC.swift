@@ -68,24 +68,30 @@ private extension DetailsCell.Kind {
     func configureCell(_ cell: DetailsCell, forecast: Forecast) {
         let title: String
         let value: String
+        let detailsIcon: UIImage
         
         switch self {
         case .pressure:
             title = NSLocalizedString("Pressure", comment: "")
             value = NSLocalizedString(forecast.pressure + " hPa", comment: "Pressure Value in Hectopascal")
+            detailsIcon = UIImage(named: "pressureIcon")!
         case .humidity:
             title = NSLocalizedString("Humidity", comment: "")
             value = NSLocalizedString(forecast.humidity + " %", comment: "Humidity Percentage")
+            detailsIcon = UIImage(named: "humidityIcon")!
         case .windSpeed:
             title = NSLocalizedString("Wind Speed", comment: "")
             value = NSLocalizedString(forecast.windSpeed + " KM/H", comment: "Wind Speed")
+            detailsIcon = UIImage(named: "windSpeedIcon")!
         case .WindDirection:
             title = NSLocalizedString("Wind Direction", comment: "")
             value = Double(forecast.windDirection)?.direction ?? "--"
+            detailsIcon = UIImage(named: "windDirectionIcon")!
         }
         
         cell.titleLabel.text = title
         cell.valueLabel.text = value
+        cell.detailsIcon.image = detailsIcon
     }
     
 }

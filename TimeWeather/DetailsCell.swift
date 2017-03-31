@@ -20,6 +20,7 @@ class DetailsCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var detailsIcon: UIImageView!
     
     public static let identifier = "DetailsCell"
 }
