@@ -47,7 +47,9 @@ class TodaysVC: UIViewController {
     }()
     
     private func dateToString(_ date: Date) -> String {
-        let components = Calendar.current.dateComponents([.day], from: Date(), to: date)
+        let secondsFromGMT = TimeZone.current.secondsFromGMT()
+        let newDate = date.addingTimeInterval(TimeInterval(secondsFromGMT))
+        let components = Calendar.current.dateComponents([.day], from: newDate, to: Date())
         let today = components.day.flatMap({ $0 == 0 ? NSLocalizedString("Today", comment: "Today translation") : nil }) ?? ""
         let dateString = [today, String(self.dateFormatter.string(from: date))].filter({ !$0.isEmpty }).joined(separator: ", ")
         
