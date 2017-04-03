@@ -71,7 +71,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         switch error {
-        case CLError.network:
+        case CLError.network, CLError.locationUnknown:
             self.locationManager.stopUpdatingLocation()
             let networkIssueAlert = UIAlertController(title: "Network Error", message: "Unable to get latest weather data", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: {
