@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -28,35 +28,23 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HM-o5-OWo">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="etJ-GN-pQg">
-                                        <rect key="frame" x="68" y="338" width="278" height="60"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-60" translatesAutoresizingMaskIntoConstraints="NO" id="QbB-UI-fkB">
-                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TimeWeather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unp-bJ-pdF">
-                                                <rect key="frame" x="70" y="0.0" width="208" height="60"/>
-                                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="35"/>
-                                                <color key="textColor" red="0.85882352941176465" green="0.85882352941176465" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.14989805219999999" green="0.45154190059999999" blue="0.6386684775" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="etJ-GN-pQg" firstAttribute="centerX" secondItem="2HM-o5-OWo" secondAttribute="centerX" id="CLa-ZQ-Ld9"/>
-                                    <constraint firstItem="etJ-GN-pQg" firstAttribute="centerY" secondItem="2HM-o5-OWo" secondAttribute="centerY" id="RqF-7I-Rwq"/>
-                                </constraints>
+                                <color key="backgroundColor" red="0.1019607843" green="0.29411764709999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TimeWeather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unp-bJ-pdF">
+                                <rect key="frame" x="103" y="351" width="208" height="35"/>
+                                <fontDescription key="fontDescription" name="MyriadPro-Bold" family="Myriad Pro" pointSize="35"/>
+                                <color key="textColor" red="0.85882352941176465" green="0.85882352941176465" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2HM-o5-OWo" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="-20" id="1iy-9S-k20"/>
                             <constraint firstAttribute="trailing" secondItem="2HM-o5-OWo" secondAttribute="trailing" id="CsZ-2V-koF"/>
+                            <constraint firstItem="unp-bJ-pdF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Dhy-d4-Sw7"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="2HM-o5-OWo" secondAttribute="bottom" id="a37-Hs-G1W"/>
                             <constraint firstItem="2HM-o5-OWo" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="bgg-NX-nhK"/>
+                            <constraint firstItem="unp-bJ-pdF" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="pdJ-ot-uvL"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -65,7 +53,4 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Icon-60" width="60" height="60"/>
-    </resources>
 </document>
