@@ -13,7 +13,6 @@ import Alamofire
 
 typealias WeatherReportCompletionHandler = (WeatherReport) -> Void
 
-
 enum WeatherAPI {
     
     private struct Request {
@@ -29,6 +28,8 @@ enum WeatherAPI {
     }
     
     private static var requestToken: Request?
+    
+    private static var searchVC: SearchVC?
 
     static func fetchWeatherReport(for coordinate: CLLocationCoordinate2D, completed: @escaping WeatherReportCompletionHandler) {
         self.requestToken?.cancel()
@@ -40,8 +41,11 @@ enum WeatherAPI {
         var forecasts: [Forecast] = []
         var todaysVC = TodaysVC()
         
+        
+        
         group.enter()
-        let detailsRequest = Alamofire.request(coordinate.detailsUrl).responseJSON { response in
+        let detailsUrl: WeatherData = .detailsLocation(coordinates: coordinate)
+        let detailsRequest = Alamofire.request(detailsUrl).responseJSON { response in
             DispatchQueue.global(qos: .default).async {
                 defer { group.leave() }
                 let result = response.result
@@ -52,7 +56,8 @@ enum WeatherAPI {
         }
 
         group.enter()
-        let forecastRequest = Alamofire.request(coordinate.forecastUrl).responseJSON { response in
+        let forecastUrl: WeatherData = .forecastLocation(coordinates: coordinate)
+        let forecastRequest = Alamofire.request(forecastUrl).responseJSON { response in
             DispatchQueue.global(qos: .default).async {
                 defer { group.leave() }
                 let result = response.result
@@ -63,6 +68,7 @@ enum WeatherAPI {
                 }
             }
         }
+        
         let requestToken = Request(detailsRequest: detailsRequest, forecastRequest: forecastRequest, handler: completed)
         self.requestToken = requestToken
         
@@ -76,19 +82,39 @@ enum WeatherAPI {
     }
 }
 
+private enum WeatherData {
+    case search(cityName: String)
+    case detailsLocation(coordinates: CLLocationCoordinate2D)
+    case forecastLocation(coordinates: CLLocationCoordinate2D)
+}
 
-fileprivate extension CLLocationCoordinate2D {
+extension WeatherData: URLConvertible {
+    
+    func asURL() throws -> URL {
+        
+        let baseUrl = "http://api.openweathermap.org/data/2.5"
+        let appid = "ff27f55b14ac026738922f15b9ce708d"
+        
+        switch self {
+        case let .search(cityName):
+            return URL(string: baseUrl + "/weather?q=\(cityName)&appid=" + appid)!
+        case let .forecastLocation(coordinates):
+            return URL(string: baseUrl + "/forecast/daily?lat=\(coordinates.latitude)&lon=\(coordinates.longitude)&cnt=10&appid=" + appid)!
+        case let .detailsLocation(coordinates):
+            return URL(string: baseUrl + "/weather?lat=\(coordinates.latitude)&lon=\(coordinates.longitude)&appid=" + appid)!
+        }
+    }
+}
+
+extension WeatherAPI {
     
     private var baseUrl: String { return "http://api.openweathermap.org/data/2.5" }
     private var appid: String { return "ff27f55b14ac026738922f15b9ce708d" }
     
-    var forecastUrl: String {
-        let url = self.baseUrl + "/forecast/daily?lat=\(self.latitude)&lon=\(self.longitude)&cnt=10&appid=" + self.appid
-        return url
-    }
+    private var cityName: String { return "" }
     
-    var detailsUrl: String {
-        let url = self.baseUrl + "/weather?lat=\(self.latitude)&lon=\(self.longitude)&appid=" + self.appid
+    var searchDetailsUrl: String {
+        let url = self.baseUrl + "/weather?q=\(cityName)&appid=" + self.appid
         return url
     }
 }

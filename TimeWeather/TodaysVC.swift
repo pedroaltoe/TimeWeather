@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol SearchVCDelegate {
+    func toggleRightPanel()
+}
+
 class TodaysVC: UIViewController {
+    
+    var delegate: SearchVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +63,7 @@ class TodaysVC: UIViewController {
     }
     
     
-    // MARK: - Public stuff
+    // MARK: - IBOutlets
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
@@ -68,11 +74,18 @@ class TodaysVC: UIViewController {
     @IBOutlet weak var minTempLabel: UILabel!
     
     
+    // MARK: - IBActions
     
-    
-    @IBAction func backButton(_ sender: Any) {
+    @IBAction func backButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        self.delegate?.toggleRightPanel()
+    }
+    
+    
+    // MARK: - Public stuff
 
     var forecast = Forecast() {
         didSet {

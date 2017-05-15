@@ -10,6 +10,11 @@ import UIKit
 import CoreLocation
 import Alamofire
 
+enum SlideOutState {
+    case Closed
+    case Opened
+}
+
 class WeatherVC: UIViewController, CLLocationManagerDelegate {
 
     override func viewDidLoad() {
@@ -27,9 +32,11 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
         self.nextDays.delegate = self
         
         self.todays.minTempLabel.isHidden = true
+        
+        self.todays.delegate = self
     }
     
-
+    
     // MARK: - Properties
     
     private let locationManager = CLLocationManager()
@@ -39,7 +46,16 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     private lazy var nextDays: NextDaysVC = {
         return self.childViewControllers.filter({ $0 is NextDaysVC }).first as! NextDaysVC
     }()
-
+    
+    let centerPanelExpandedOffset: CGFloat = 60
+    var currentState: SlideOutState = .Closed {
+        didSet {
+            let shouldShowShadow = currentState != .Closed
+            showShadowForCenterViewController(shouldShowShadow: shouldShowShadow)
+        }
+    }
+    
+    var searchVC: SearchVC?
     
     
     // MARK: - CLLocationManager
@@ -128,6 +144,9 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
 
 }
 
+
+    // MARK: - NextDaysDelegate
+
 extension WeatherVC: NextDaysVCDelegate {
     
     func didSelectForecast(forecast: Forecast) {
@@ -136,6 +155,75 @@ extension WeatherVC: NextDaysVCDelegate {
         weatherDetailsVC.weatherDetails = forecast
         weatherDetailsVC.currentWeather = CurrentWeather(cityName: self.todays.currentWeather.cityName, countryName: self.todays.currentWeather.countryName, date: forecast.date, weatherType: forecast.weatherType, currentTemp: forecast.highTemp)
         self.present(weatherDetailsVC, animated: true , completion: nil)
+    }
+}
+
+
+    // MARK: - SearchVCDelegate
+
+extension WeatherVC: SearchVCDelegate {
+    
+    func toggleRightPanel() {
+        let notAlreadyExpanded = (currentState != .Opened)
+        
+        if notAlreadyExpanded {
+            addRightPanelViewController()
+        }
+        
+        animateRightPanel(shouldExpand: notAlreadyExpanded)
+    }
+    
+    func addRightPanelViewController() {
+        if self.searchVC == nil {
+            self.searchVC = UIStoryboard.searchVC()
+            
+            addChildSidePanelController(searchPanelControler: searchVC!)
+        }
+    }
+    
+    func addChildSidePanelController(searchPanelControler: SearchVC) {
+        
+        self.view.insertSubview(searchPanelControler.view, at: 0)
+        addChildViewController(searchPanelControler)
+        searchPanelControler.didMove(toParentViewController: self)
+    }
+    
+    func animateRightPanel(shouldExpand: Bool) {
+        if (shouldExpand) {
+            currentState = .Opened
+            
+            animateCenterPanelXPosition(targetPosition: -self.view.frame.width + centerPanelExpandedOffset)
+        } else {
+            animateCenterPanelXPosition(targetPosition: 0) { _ in
+                self.currentState = .Closed
+                
+                self.searchVC!.view.removeFromSuperview()
+                self.searchVC = nil;
+            }
+        }
+    }
+    
+    func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut , animations: {
+            self.view.frame.origin.x = targetPosition
+        }, completion: completion)
+    }
+    
+    func showShadowForCenterViewController(shouldShowShadow: Bool) {
+        if (shouldShowShadow) {
+            self.view.layer.shadowOpacity = 0.8
+        } else {
+            self.view.layer.shadowOpacity = 0.0
+        }
+    }
+    
+}
+
+private extension UIStoryboard {
+    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
+    
+    class func searchVC() -> SearchVC? {
+        return mainStoryboard().instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
     }
 }
 
