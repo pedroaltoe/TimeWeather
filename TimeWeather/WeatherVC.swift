@@ -10,30 +10,31 @@ import UIKit
 import CoreLocation
 import Alamofire
 
-enum SlideOutState {
-    case Closed
-    case Opened
+protocol WeatherVCDelegate {
+    func toggleRightPanel()
 }
+
 
 class WeatherVC: UIViewController, CLLocationManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.nextDays.refreshControl = UIRefreshControl()
+        let refreshControl = UIRefreshControl()
+        self.nextDays.refreshControl = refreshControl
         self.nextDays.refreshControl?.addTarget(self, action: #selector(type(of: self).didPullToRefresh(control:)), for: .valueChanged)
         self.nextDays.refreshControl?.beginRefreshing()
         
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.startUpdatingLocation()
+
+        self.didPullToRefresh(control: refreshControl)
         
         self.nextDays.delegate = self
         
         self.todays.minTempLabel.isHidden = true
         
-        self.todays.delegate = self
     }
     
     
@@ -47,15 +48,13 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
         return self.childViewControllers.filter({ $0 is NextDaysVC }).first as! NextDaysVC
     }()
     
-    let centerPanelExpandedOffset: CGFloat = 60
-    var currentState: SlideOutState = .Closed {
+    var location: Location? = nil {
         didSet {
-            let shouldShowShadow = currentState != .Closed
-            showShadowForCenterViewController(shouldShowShadow: shouldShowShadow)
+            self.fetchWeatherForecast()
         }
     }
     
-    var searchVC: SearchVC?
+    var delegate: WeatherVCDelegate?
     
     
     // MARK: - CLLocationManager
@@ -127,10 +126,16 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
     @objc
     private func fetchWeatherForecast() {
-        guard let coordinate = self.coordinate else { return }
+        let locationType: LocationType
+        if let location = self.location {
+            locationType = .name(location.description)
+        } else {
+            guard let coordinate = self.coordinate else { preconditionFailure() }
+            locationType = .coordinate(coordinate)
+        }
         self.nextDays.refreshControl?.beginRefreshing()
 
-        WeatherAPI.fetchWeatherReport(for: coordinate) { [weak self] report in
+        WeatherAPI.fetchWeatherReport(for: locationType) { [weak self] report in
             self?.todays.currentWeather = report.currentWeather
             self?.nextDays.forecasts = report.forecasts
             self?.nextDays.refreshControl?.endRefreshing()
@@ -139,7 +144,12 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
     @objc
     private func didPullToRefresh(control: UIRefreshControl) {
-        self.locationManager.startUpdatingLocation()
+        if let _ = self.location {
+            self.fetchWeatherForecast()
+        } else {
+            self.locationManager.startUpdatingLocation()
+        }
+
     }
 
 }
@@ -158,73 +168,8 @@ extension WeatherVC: NextDaysVCDelegate {
     }
 }
 
-
-    // MARK: - SearchVCDelegate
-
-extension WeatherVC: SearchVCDelegate {
-    
-    func toggleRightPanel() {
-        let notAlreadyExpanded = (currentState != .Opened)
-        
-        if notAlreadyExpanded {
-            addRightPanelViewController()
-        }
-        
-        animateRightPanel(shouldExpand: notAlreadyExpanded)
-    }
-    
-    func addRightPanelViewController() {
-        if self.searchVC == nil {
-            self.searchVC = UIStoryboard.searchVC()
-            
-            addChildSidePanelController(searchPanelControler: searchVC!)
-        }
-    }
-    
-    func addChildSidePanelController(searchPanelControler: SearchVC) {
-        
-        self.view.insertSubview(searchPanelControler.view, at: 0)
-        addChildViewController(searchPanelControler)
-        searchPanelControler.didMove(toParentViewController: self)
-    }
-    
-    func animateRightPanel(shouldExpand: Bool) {
-        if (shouldExpand) {
-            currentState = .Opened
-            
-            animateCenterPanelXPosition(targetPosition: -self.view.frame.width + centerPanelExpandedOffset)
-        } else {
-            animateCenterPanelXPosition(targetPosition: 0) { _ in
-                self.currentState = .Closed
-                
-                self.searchVC!.view.removeFromSuperview()
-                self.searchVC = nil;
-            }
-        }
-    }
-    
-    func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut , animations: {
-            self.view.frame.origin.x = targetPosition
-        }, completion: completion)
-    }
-    
-    func showShadowForCenterViewController(shouldShowShadow: Bool) {
-        if (shouldShowShadow) {
-            self.view.layer.shadowOpacity = 0.8
-        } else {
-            self.view.layer.shadowOpacity = 0.0
-        }
-    }
-    
-}
-
 private extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
-    
-    class func searchVC() -> SearchVC? {
-        return mainStoryboard().instantiateViewController(withIdentifier: "SearchVC") as? SearchVC
-    }
 }
 
 extension UIImageView {

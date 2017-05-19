@@ -8,13 +8,7 @@
 
 import UIKit
 
-protocol SearchVCDelegate {
-    func toggleRightPanel()
-}
-
 class TodaysVC: UIViewController {
-    
-    var delegate: SearchVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,10 +72,6 @@ class TodaysVC: UIViewController {
     
     @IBAction func backButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
-        self.delegate?.toggleRightPanel()
     }
     
     
