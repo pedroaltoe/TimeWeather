@@ -9,6 +9,8 @@
 import UIKit
 
 class WeatherCell: UITableViewCell {
+    
+    var currentWeather = CurrentWeather()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +47,6 @@ class WeatherCell: UITableViewCell {
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
-        dateFormatter.timeZone = TimeZone.current
         dateFormatter.timeStyle = .none
         dateFormatter.dateFormat = "EEEE"
         return dateFormatter
@@ -54,7 +55,7 @@ class WeatherCell: UITableViewCell {
     private func dateToString(_ date: Date) -> String {
         let secondsFromGMT = TimeZone.current.secondsFromGMT()
         let newDate = date.addingTimeInterval(TimeInterval(secondsFromGMT))
-        let components = Calendar.current.dateComponents([.day], from: newDate, to: Date())
+        let components = Calendar.current.dateComponents([.day], from: Date(), to: newDate)
         let today = components.day.flatMap({ $0 == 0 ? NSLocalizedString("Today", comment: "Today translation") : nil }) ?? String(self.dateFormatter.string(from: date))
         return today!
     }

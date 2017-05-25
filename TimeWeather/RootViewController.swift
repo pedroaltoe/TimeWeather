@@ -44,7 +44,8 @@ class RootViewController: UIViewController {
         self.weatherVC.view.frame = self.view.bounds
         self.view.addSubview(self.weatherVC.view)
         self.weatherVC.didMove(toParentViewController: self)
-    
+        
+        self.automaticallyAdjustsScrollViewInsets = false
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(type(of: self).didSelectSearch))
         
@@ -93,19 +94,14 @@ extension RootViewController: WeatherVCDelegate {
     }
     
     func addChildSidePanelController(vc: UIViewController) {
-        let navigationBarHeight = self.navigationController!.navigationBar.frame.height
-        let statusBar = UIApplication.shared.statusBarFrame.height
-        let locationSearchVCViewWidth = self.weatherVC.view.frame.width - self.centerPanelExpandedOffset
-        let locationSearchVCViewHeight = self.weatherVC.view.frame.height - (navigationBarHeight + statusBar)
+        let locationSearchVCViewYOrigin = self.navigationController!.navigationBar.frame.maxY
+        let locationSearchVCViewWidth = self.weatherVC.view.frame.size.width - self.centerPanelExpandedOffset
+        let locationSearchVCViewHeight = self.weatherVC.view.frame.size.height
         
         addChildViewController(vc)
-        vc.view.frame = CGRect(x: self.centerPanelExpandedOffset, y: (navigationBarHeight + statusBar) , width: locationSearchVCViewWidth, height: locationSearchVCViewHeight)
+        vc.view.frame = CGRect(x: self.centerPanelExpandedOffset, y: locationSearchVCViewYOrigin , width: locationSearchVCViewWidth, height: locationSearchVCViewHeight)
         self.view.insertSubview(vc.view, at: 0)
         vc.didMove(toParentViewController: self)
-    }
-    
-    func viewAdaptScreen() {
-        
     }
     
     func animateRightPanel(shouldExpand: Bool) {

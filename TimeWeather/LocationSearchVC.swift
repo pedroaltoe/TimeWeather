@@ -35,13 +35,14 @@ class LocationSearchVC: UITableViewController, UISearchBarDelegate, UISearchCont
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.obscuresBackgroundDuringPresentation = false
-        definesPresentationContext = false
-        
-        self.tableView.tableHeaderView = searchController.searchBar
-        self.tableView.isScrollEnabled = false
+        self.searchController.searchBar.sizeToFit()
+    
+        self.tableView.tableHeaderView = self.searchController.searchBar
+//        self.tableView.isScrollEnabled = false
         
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
+        
     }
     
     func reloadData() {

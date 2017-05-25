@@ -336,7 +336,7 @@
                         <constraints>
                             <constraint firstItem="wea-vT-bdO" firstAttribute="leading" secondItem="eMp-OP-Rra" secondAttribute="leading" id="ARe-zi-f9L"/>
                             <constraint firstAttribute="trailing" secondItem="wea-vT-bdO" secondAttribute="trailing" id="VZo-aS-q7C"/>
-                            <constraint firstItem="wea-vT-bdO" firstAttribute="top" secondItem="u6w-LW-ArA" secondAttribute="bottom" constant="-20" id="W3n-8s-QGV"/>
+                            <constraint firstItem="wea-vT-bdO" firstAttribute="top" secondItem="eMp-OP-Rra" secondAttribute="top" id="agj-km-oHt"/>
                             <constraint firstItem="Ivj-ef-qQz" firstAttribute="top" secondItem="XRw-6P-w88" secondAttribute="bottom" id="eJC-b7-oE8"/>
                             <constraint firstAttribute="trailing" secondItem="XRw-6P-w88" secondAttribute="trailing" id="hZO-AX-dXM"/>
                             <constraint firstItem="XRw-6P-w88" firstAttribute="top" secondItem="eMp-OP-Rra" secondAttribute="top" constant="300" id="tjM-tP-iHW"/>
@@ -576,7 +576,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationSearchCell" id="1qZ-zg-TQi" customClass="LocationSearchCell" customModule="TimeWeather" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationSearchCell" id="1qZ-zg-TQi" customClass="LocationSearchCell" customModule="TimeWeather" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1qZ-zg-TQi" id="wnQ-gO-tv2">
