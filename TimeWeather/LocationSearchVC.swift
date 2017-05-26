@@ -51,8 +51,8 @@ class LocationSearchVC: UITableViewController, UISearchBarDelegate, UISearchCont
     }
 }
 
-// MARK: - UITableViewDataSource
 
+// MARK: - UITableViewDataSource
 
 extension LocationSearchVC {
     
@@ -64,6 +64,7 @@ extension LocationSearchVC {
         return tableView.dequeueReusableCell(withIdentifier: LocationSearchCell.identifier, for: indexPath)
     }
 }
+
 
 // MARK: - UITableViewDelegate
 
@@ -82,6 +83,9 @@ extension LocationSearchVC {
     }
 }
 
+
+//MARK: - UISearchBarDelegate
+
 extension LocationSearchVC {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchText.folding(options: .diacriticInsensitive, locale: .current)
@@ -90,5 +94,9 @@ extension LocationSearchVC {
                 self?.locations = locations
             }
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.locations.removeAll()
     }
 }
