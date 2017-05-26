@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WeatherVC.swift
 //  TimeWeather
 //
 //  Created by Pedro Altoe Costa on 27/12/16.
