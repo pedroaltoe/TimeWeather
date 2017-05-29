@@ -48,11 +48,8 @@ class TodaysVC: UIViewController {
     
     private func dateToString(_ date: Date) -> String {
         let calendar = Calendar.current
-        let dateNow = Date()
-        let date1 = calendar.startOfDay(for: date)
-        let date2 = calendar.startOfDay(for: dateNow)
-        let components = calendar.dateComponents([.day], from: date1, to: date2)
-        let today = components.day.flatMap({ $0 == 0 ? NSLocalizedString("Today", comment: "Today translation") : nil }) ?? ""
+        let sameDate = calendar.isDate(date, inSameDayAs: Date())
+        let today = ( sameDate ? NSLocalizedString("Today", comment: "Today translation") : nil ) ?? ""
         let dateString = [today, String(self.dateFormatter.string(from: date))].filter({ !$0.isEmpty }).joined(separator: ", ")
         
         return dateString
