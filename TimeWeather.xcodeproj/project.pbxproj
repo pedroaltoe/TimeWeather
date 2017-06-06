@@ -14,7 +14,6 @@
 		3757DBA61E1B780D00295A6C /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA51E1B780D00295A6C /* Forecast.swift */; };
 		3757DBA81E1B781300295A6C /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA71E1B781300295A6C /* WeatherCell.swift */; };
 		3757DBAA1E1B781F00295A6C /* WeatherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3757DBA91E1B781F00295A6C /* WeatherVC.swift */; };
-		376C536C1E56848E0055BE08 /* Myriad Pro Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */; };
 		376C536D1E56848E0055BE08 /* Myriad Pro Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */; };
 		376C536E1E56848E0055BE08 /* Myriad Pro Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */; };
 		376C53901E5E7D630055BE08 /* NextDaysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C538F1E5E7D630055BE08 /* NextDaysVC.swift */; };
@@ -23,6 +22,7 @@
 		376C54081E666FFB0055BE08 /* WeatherReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C54071E666FFB0055BE08 /* WeatherReport.swift */; };
 		376C540A1E6673FA0055BE08 /* WeatherAPI+CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C54091E6673FA0055BE08 /* WeatherAPI+CurrentWeather.swift */; };
 		376C540C1E667B960055BE08 /* WeatherAPI+Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C540B1E667B960055BE08 /* WeatherAPI+Forecast.swift */; };
+		378673A91EE675F6009E7BC7 /* Myriad Pro Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 378673A81EE675F6009E7BC7 /* Myriad Pro Regular.ttf */; };
 		37AA731E1E48225B00FB94CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA731C1E48225B00FB94CE /* Localizable.strings */; };
 		37E160941EC9746F005F95B6 /* LocationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E160931EC9746F005F95B6 /* LocationAPI.swift */; };
 		37E160961EC97496005F95B6 /* LocationAPI+Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E160951EC97496005F95B6 /* LocationAPI+Location.swift */; };
@@ -48,15 +48,15 @@
 		3757DBA51E1B780D00295A6C /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		3757DBA71E1B781300295A6C /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		3757DBA91E1B781F00295A6C /* WeatherVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherVC.swift; sourceTree = "<group>"; };
-		376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Bold.ttf"; sourceTree = "<group>"; };
-		376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Italic.ttf"; sourceTree = "<group>"; };
-		376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Myriad Pro Regular.ttf"; sourceTree = "<group>"; };
+		376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Myriad Pro Bold.ttf"; path = "Fonts/Myriad Pro Bold.ttf"; sourceTree = "<group>"; };
+		376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Myriad Pro Italic.ttf"; path = "Fonts/Myriad Pro Italic.ttf"; sourceTree = "<group>"; };
 		376C538F1E5E7D630055BE08 /* NextDaysVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextDaysVC.swift; sourceTree = "<group>"; };
 		376C53911E5E7DED0055BE08 /* TodaysVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaysVC.swift; sourceTree = "<group>"; };
 		376C54031E666D300055BE08 /* WeatherAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		376C54071E666FFB0055BE08 /* WeatherReport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherReport.swift; sourceTree = "<group>"; };
 		376C54091E6673FA0055BE08 /* WeatherAPI+CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeatherAPI+CurrentWeather.swift"; sourceTree = "<group>"; };
 		376C540B1E667B960055BE08 /* WeatherAPI+Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeatherAPI+Forecast.swift"; sourceTree = "<group>"; };
+		378673A81EE675F6009E7BC7 /* Myriad Pro Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Myriad Pro Regular.ttf"; path = "Fonts/Myriad Pro Regular.ttf"; sourceTree = "<group>"; };
 		37AA731D1E48225B00FB94CE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37AA73211E48255C00FB94CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37E160931EC9746F005F95B6 /* LocationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAPI.swift; sourceTree = "<group>"; };
@@ -133,8 +133,8 @@
 		376C536B1E5683F20055BE08 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				376C536A1E5670050055BE08 /* Myriad Pro Regular.ttf */,
 				376C53691E5670050055BE08 /* Myriad Pro Italic.ttf */,
+				378673A81EE675F6009E7BC7 /* Myriad Pro Regular.ttf */,
 				376C53681E5670050055BE08 /* Myriad Pro Bold.ttf */,
 			);
 			name = Fonts;
@@ -261,8 +261,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				37E493461E81EF8A002C1885 /* Main.storyboard in Resources */,
-				376C536C1E56848E0055BE08 /* Myriad Pro Regular.ttf in Resources */,
 				376C536D1E56848E0055BE08 /* Myriad Pro Italic.ttf in Resources */,
+				378673A91EE675F6009E7BC7 /* Myriad Pro Regular.ttf in Resources */,
 				376C536E1E56848E0055BE08 /* Myriad Pro Bold.ttf in Resources */,
 				3757DB9A1E1B764D00295A6C /* LaunchScreen.storyboard in Resources */,
 				37AA731E1E48225B00FB94CE /* Localizable.strings in Resources */,
