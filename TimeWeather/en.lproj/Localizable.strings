@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  TimeWeather
+
+  Created by Pedro Altoe Costa on 6/2/17.
+  Copyright © 2017 Pedro Altoe Costa. All rights reserved.
+*/
+
+Today = "Today";
+Mist = "Mist";
+Fog = "Fog";
+Haze = "Haze";
+Rain = "Rain";
+Drizzle = "Drizzle";
+Clouds = "Clouds";
+Partially_Cloudy = "Partially Cloudy";
+Snow = "Snow";
+Clear = "Clear";
+Brazil = "Brazil";
+Thunder_Storm = "Thunder Storm";

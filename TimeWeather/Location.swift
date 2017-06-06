@@ -2,16 +2,13 @@
 //  Location.swift
 //  TimeWeather
 //
-//  Created by Pedro Altoe Costa on 3/1/17.
+//  Created by Pedro Altoe Costa on 15/5/17.
 //  Copyright © 2017 Pedro Altoe Costa. All rights reserved.
 //
 
-import CoreLocation
+import Foundation
 
-class Location {
-    static var sharedInstance = Location()
-    private init() {}
-    
-    var latitude: Double!
-    var longitude: Double!
+struct Location {
+    let id: String
+    let description: String
 }
