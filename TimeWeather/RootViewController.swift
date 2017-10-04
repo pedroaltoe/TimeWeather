@@ -17,6 +17,8 @@ class RootViewController: UIViewController {
     
     //MARK: - Properties
     
+    var didSelectSearchButton = false
+    
     fileprivate lazy var weatherVC: WeatherVC = {
         return UIStoryboard.weatherVC!
     }()
@@ -55,8 +57,15 @@ class RootViewController: UIViewController {
     @objc
     private func didSelectSearch() {
         self.weatherVC.delegate?.toggleRightPanel()
-        self.locationSearchVC.searchController.isActive = false
         self.locationSearchVC.locations.removeAll()
+        
+        if self.didSelectSearchButton {
+            self.locationSearchVC.searchController.isActive = false
+            self.didSelectSearchButton = false
+        } else {
+            self.locationSearchVC.searchController.isActive = true
+            self.didSelectSearchButton = true
+        }
     }
     
     @objc
