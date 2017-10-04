@@ -67,13 +67,6 @@ class TodaysVC: UIViewController {
     @IBOutlet weak var minTempLabel: UILabel!
     
     
-    // MARK: - IBActions
-    
-    @IBAction func backButton(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
     // MARK: - Public stuff
 
     var forecast = Forecast() {
