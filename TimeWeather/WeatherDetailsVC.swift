@@ -16,7 +16,7 @@ class WeatherDetailsVC: UIViewController {
         self.infoDays.currentWeather = self.currentWeather
         self.infoDays.forecast = self.weatherDetails
         self.detailsDayVC.detailsDay = self.weatherDetails
-    }   
+    }
     
     var weatherDetails = Forecast()
     var currentWeather = CurrentWeather()

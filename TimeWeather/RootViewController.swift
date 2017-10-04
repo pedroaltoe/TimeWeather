@@ -17,8 +17,6 @@ class RootViewController: UIViewController {
     
     //MARK: - Properties
     
-    var didSelectSearchButton = false
-    
     fileprivate lazy var weatherVC: WeatherVC = {
         return UIStoryboard.weatherVC!
     }()
