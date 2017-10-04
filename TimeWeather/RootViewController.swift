@@ -56,14 +56,7 @@ class RootViewController: UIViewController {
     private func didSelectSearch() {
         self.weatherVC.delegate?.toggleRightPanel()
         self.locationSearchVC.locations.removeAll()
-        
-        if self.didSelectSearchButton {
-            self.locationSearchVC.searchController.isActive = false
-            self.didSelectSearchButton = false
-        } else {
-            self.locationSearchVC.searchController.isActive = true
-            self.didSelectSearchButton = true
-        }
+        self.locationSearchVC.searchController.isActive = !self.locationSearchVC.searchController.isActive
     }
     
     @objc
@@ -90,14 +83,10 @@ extension RootViewController: WeatherVCDelegate {
         let notAlreadyExpanded = (currentState != .Opened)
         
         if notAlreadyExpanded {
-            addRightPanelViewController()
+            addChildSidePanelController(vc: self.locationSearchVC)
         }
         
         animateRightPanel(shouldExpand: notAlreadyExpanded)
-    }
-    
-    func addRightPanelViewController() {
-        addChildSidePanelController(vc: self.locationSearchVC)
     }
     
     func addChildSidePanelController(vc: UIViewController) {
