@@ -512,7 +512,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6df-zG-QGL">
-                                                            <rect key="frame" x="0.0" y="43" width="37" height="17"/>
+                                                            <rect key="frame" x="0.0" y="43" width="42" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="ftW-bS-DWA"/>
                                                             </constraints>
