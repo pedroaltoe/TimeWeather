@@ -56,7 +56,7 @@ class WeatherCell: UITableViewCell {
         let calendar = Calendar.current
         let sameDate = calendar.isDate(date, inSameDayAs: Date())
         let today = ( sameDate ? NSLocalizedString("Today", comment: "Today translation") : nil ) ?? String(self.dateFormatter.string(from: date))
-        return today!
+        return today
     }
     
     public static let identifier = "WeatherCell"
