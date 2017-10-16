@@ -21,6 +21,8 @@ class RootViewController: UIViewController {
         return UIStoryboard.weatherVC!
     }()
     
+    var searchButton = UIBarButtonItem()
+    
     let centerPanelExpandedOffset: CGFloat = 60
     var currentState: SlideOutState = .Closed {
         didSet {
@@ -47,7 +49,9 @@ class RootViewController: UIViewController {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(type(of: self).didSelectSearch))
+        self.searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(type(of: self).didSelectSearch))
+        
+        self.navigationItem.rightBarButtonItem = self.searchButton
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Current Location", style: .plain, target: self, action: #selector(type(of: self).didSelectCurrentLocation))
     }
@@ -56,7 +60,10 @@ class RootViewController: UIViewController {
     private func didSelectSearch() {
         self.weatherVC.delegate?.toggleRightPanel()
         self.locationSearchVC.locations.removeAll()
-        self.locationSearchVC.searchController.isActive = !self.locationSearchVC.searchController.isActive
+        self.searchButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            self.searchButton.isEnabled = true
+        })
     }
     
     @objc
@@ -105,14 +112,23 @@ extension RootViewController: WeatherVCDelegate {
         if (shouldExpand) {
             currentState = .Opened
             
+            self.locationSearchVC.searchController.isActive = true
+            
+            self.navigationItem.leftBarButtonItem?.isEnabled = false
+            
             self.weatherVC.view.isUserInteractionEnabled = false
             
             animateCenterPanelXPosition(targetPosition: -self.weatherVC.view.frame.width + centerPanelExpandedOffset)
         } else {
+            
+            self.locationSearchVC.searchController.isActive = false
+            
+            self.navigationItem.leftBarButtonItem?.isEnabled = true
+            
+            self.weatherVC.view.isUserInteractionEnabled = true
+            
             animateCenterPanelXPosition(targetPosition: 0) { _ in
                 self.currentState = .Closed
-                
-                self.weatherVC.view.isUserInteractionEnabled = true
                 
                 self.locationSearchVC.view.removeFromSuperview()
             }

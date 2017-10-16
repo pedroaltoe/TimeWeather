@@ -77,7 +77,7 @@ extension LocationSearchVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.locationSearchVC(vc: self, didSelectLocation: self.locations[indexPath.row])
-        self.searchController.isActive = !self.searchController.isActive
+        self.searchController.isActive = false
     }
 }
 
