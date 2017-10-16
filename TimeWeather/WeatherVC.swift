@@ -165,7 +165,6 @@ extension WeatherVC: NextDaysVCDelegate {
         weatherDetailsVC.weatherDetails = forecast
         weatherDetailsVC.currentWeather = CurrentWeather(cityName: self.todays.currentWeather.cityName, countryName: self.todays.currentWeather.countryName, date: forecast.date, weatherType: forecast.weatherType, currentTemp: forecast.highTemp)
         self.navigationController?.pushViewController(weatherDetailsVC, animated: true)
-//        self.present(weatherDetailsVC, animated: true , completion: nil)
     }
 }
 
