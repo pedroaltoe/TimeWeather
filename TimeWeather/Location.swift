@@ -11,4 +11,5 @@ import Foundation
 struct Location {
     let id: String
     let description: String
+    let mainText: String
 }

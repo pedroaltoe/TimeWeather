@@ -128,7 +128,7 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     private func fetchWeatherForecast() {
         let locationType: LocationType
         if let location = self.location {
-            locationType = .name(location.description)
+            locationType = .name(location.mainText)
         } else {
             guard let coordinate = self.coordinate else { preconditionFailure() }
             locationType = .coordinate(coordinate)

@@ -107,7 +107,7 @@ extension WeatherData: URLConvertible {
         
         switch self {
         case let .forecastLocation(locationType):
-            return URL(string: baseUrl + "/forecast/daily?cnt=10&appid=\(appid)&\(locationType.params)")!
+            return URL(string: baseUrl + "/forecast/daily?\(locationType.params)&cnt=10&appid=\(appid)")!
         case let .detailsLocation(locationType):
             return URL(string: baseUrl + "/weather?appid=\(appid)&\(locationType.params)")!
         }

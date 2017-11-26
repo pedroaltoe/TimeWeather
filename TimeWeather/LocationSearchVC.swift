@@ -87,7 +87,7 @@ extension LocationSearchVC {
 extension LocationSearchVC {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchText.folding(options: .diacriticInsensitive, locale: .current)
-        LocationAPI.searchLocation(query: text.replacingOccurrences(of: " ", with: "")) { [weak self] locations in
+        LocationAPI.searchLocation(query: text.replacingOccurrences(of: " ", with: "+")) { [weak self] locations in
             DispatchQueue.main.async {
                 self?.locations = locations
             }
