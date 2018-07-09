@@ -27,7 +27,7 @@ enum LocationAPI {
                 defer { completed(locations) }
                 guard let json = result.value as? [String: Any],
                 let predictions = json["predictions"] as? [[String: Any]] else { return }
-                locations = predictions.flatMap({ Location(json: $0) })
+                locations = predictions.compactMap({ Location(json: $0) })
             }
         }
     }

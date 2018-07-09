@@ -32,7 +32,7 @@ class TodaysVC: UIViewController {
             self.currentWeatherImage.image = UIImage(named: "Rain-ImgV")
         case "FOG", "NÉVOA":
             self.currentWeatherImage.image = UIImage(named: "Mist-ImgV")
-        case "HAZE", "NÉVOA":
+        case "HAZE":
             self.currentWeatherImage.image = UIImage(named: "Mist-ImgV")
         default:
             self.currentWeatherImage.image = UIImage(named: self.currentWeather.weatherType + "-ImgV")
