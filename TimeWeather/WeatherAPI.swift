@@ -36,9 +36,6 @@ enum WeatherAPI {
         
         var currentWeather = CurrentWeather()
         var forecasts: [Forecast] = []
-        var todaysVC = TodaysVC()
-        
-        
         
         group.enter()
         let detailsUrl: WeatherData = .detailsLocation(locationType: locationType)

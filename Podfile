@@ -4,6 +4,6 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'TimeWeather' do
-  pod 'Alamofire', '~> 4.0'
+  pod 'Alamofire'
 
 end

@@ -1,7 +1,7 @@
 {
   "images" : [
-    {
-      "idiom" : "universal",
+  	{
+  		"idiom" : "universal",
       "filename" : "Thunderstorm-For.png",
       "scale" : "1x"
     },
@@ -14,7 +14,7 @@
       "idiom" : "universal",
       "filename" : "Thunderstorm-For@3x.png",
       "scale" : "3x"
-    }
+  	}
   ],
   "info" : {
     "version" : 1,

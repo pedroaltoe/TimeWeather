@@ -28,7 +28,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -48,10 +48,10 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="J60-t7-WeS" secondAttribute="bottom" id="0cZ-sS-b5U"/>
+                            <constraint firstAttribute="bottom" secondItem="J60-t7-WeS" secondAttribute="bottom" id="0cZ-sS-b5U"/>
                             <constraint firstItem="J60-t7-WeS" firstAttribute="top" secondItem="vzz-z1-Ocx" secondAttribute="bottom" id="BfC-V9-ESC"/>
                             <constraint firstItem="vzz-z1-Ocx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dME-ng-bIs"/>
                             <constraint firstItem="vzz-z1-Ocx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="ghe-PW-TCa"/>
@@ -183,10 +183,10 @@
         <scene sceneID="TM5-4f-e2H">
             <objects>
                 <tableViewController id="RuK-uh-SX8" customClass="NextDaysVC" customModule="TimeWeather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="R8X-NL-D0H">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="R8X-NL-D0H">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="268"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeatherCell" rowHeight="90" id="kXc-HO-a8F" customClass="WeatherCell" customModule="TimeWeather" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="90"/>
@@ -336,7 +336,7 @@
                             <constraint firstItem="XRw-6P-w88" firstAttribute="top" secondItem="wea-vT-bdO" secondAttribute="bottom" id="0Cn-7B-Ifx"/>
                             <constraint firstItem="wea-vT-bdO" firstAttribute="leading" secondItem="eMp-OP-Rra" secondAttribute="leading" id="ARe-zi-f9L"/>
                             <constraint firstAttribute="trailing" secondItem="wea-vT-bdO" secondAttribute="trailing" id="VZo-aS-q7C"/>
-                            <constraint firstItem="Ivj-ef-qQz" firstAttribute="top" secondItem="XRw-6P-w88" secondAttribute="bottom" id="eJC-b7-oE8"/>
+                            <constraint firstAttribute="bottom" secondItem="XRw-6P-w88" secondAttribute="bottom" id="eJC-b7-oE8"/>
                             <constraint firstAttribute="trailing" secondItem="XRw-6P-w88" secondAttribute="trailing" id="hZO-AX-dXM"/>
                             <constraint firstItem="wea-vT-bdO" firstAttribute="top" secondItem="u6w-LW-ArA" secondAttribute="bottom" constant="-20" id="vA5-UI-h5s"/>
                             <constraint firstItem="XRw-6P-w88" firstAttribute="leading" secondItem="eMp-OP-Rra" secondAttribute="leading" id="vEW-7j-8vb"/>

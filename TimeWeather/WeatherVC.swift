@@ -42,10 +42,10 @@ class WeatherVC: UIViewController, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
     fileprivate lazy var todays: TodaysVC = {
-        return self.childViewControllers.filter({ $0 is TodaysVC }).first as! TodaysVC
+        return self.children.filter({ $0 is TodaysVC }).first as! TodaysVC
     }()
     private lazy var nextDays: NextDaysVC = {
-        return self.childViewControllers.filter({ $0 is NextDaysVC }).first as! NextDaysVC
+        return self.children.filter({ $0 is NextDaysVC }).first as! NextDaysVC
     }()
     
     var location: Location? = nil {

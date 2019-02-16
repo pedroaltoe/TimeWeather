@@ -25,9 +25,9 @@ class WeatherDetailsVC: UIViewController {
     // MARK - Properties
     
     private lazy var infoDays: TodaysVC = {
-        return self.childViewControllers.filter({ $0 is TodaysVC }).first as! TodaysVC
+        return self.children.filter({ $0 is TodaysVC }).first as! TodaysVC
     }()
     private lazy var detailsDayVC: DetailsDayVC = {
-        return self.childViewControllers.filter({ $0 is DetailsDayVC }).first as! DetailsDayVC
+        return self.children.filter({ $0 is DetailsDayVC }).first as! DetailsDayVC
     }()
 }

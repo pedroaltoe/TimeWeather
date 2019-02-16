@@ -42,10 +42,10 @@ class RootViewController: UIViewController {
         
         self.weatherVC.delegate = self
         
-        self.addChildViewController(self.weatherVC)
+        self.addChild(self.weatherVC)
         self.weatherVC.view.frame = self.view.bounds
         self.view.addSubview(self.weatherVC.view)
-        self.weatherVC.didMove(toParentViewController: self)
+        self.weatherVC.didMove(toParent: self)
         
         self.automaticallyAdjustsScrollViewInsets = false
         
@@ -101,10 +101,10 @@ extension RootViewController: WeatherVCDelegate {
         let locationSearchVCViewWidth = self.weatherVC.view.frame.size.width - self.centerPanelExpandedOffset
         let locationSearchVCViewHeight = self.weatherVC.view.frame.size.height
         
-        addChildViewController(vc)
+        addChild(vc)
         vc.view.frame = CGRect(x: self.centerPanelExpandedOffset, y: locationSearchVCViewYOrigin , width: locationSearchVCViewWidth, height: locationSearchVCViewHeight)
         self.view.insertSubview(vc.view, at: 0)
-        vc.didMove(toParentViewController: self)
+        vc.didMove(toParent: self)
     }
     
     func animateRightPanel(shouldExpand: Bool) {

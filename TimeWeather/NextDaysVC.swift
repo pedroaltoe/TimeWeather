@@ -13,6 +13,12 @@ final class NextDaysVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 11.0, *) {
+            self.tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
+        
         self.reloadData()
     }
     
@@ -66,7 +72,7 @@ extension NextDaysVC {
         guard let cell = cell as? WeatherCell else {
             preconditionFailure()
         }
-        cell.configureCell(forecast: forecasts[indexPath.row])
+        cell.configureCell(forecast: self.forecasts[indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
